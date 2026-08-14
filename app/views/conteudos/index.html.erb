@@ -1,0 +1,60 @@
+<% content_for :title, "Conteúdo do Site" %>
+
+<div class="admin-topbar">
+  <h2 class="admin-page-title">Conteúdo do Site</h2>
+</div>
+
+<p style="color:var(--bc-muted);margin-top:-8px">Edite textos, títulos e imagens de cada seção. Em seções com fotos (carrossel, turmas, galeria), cada foto é um item — use "+ Adicionar" para incluir mais.</p>
+
+<% Conteudo::SECOES.each do |secao, rotulo| %>
+  <% itens = @por_secao[secao] || [] %>
+  <div class="admin-card">
+    <div class="admin-topbar">
+      <h3 class="admin-page-title" style="font-size:1.15rem"><%= rotulo %></h3>
+      <%= link_to "+ Adicionar", new_conteudo_path(secao: secao), class: "admin-btn-ghost" %>
+    </div>
+
+    <% if itens.any? %>
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th>Foto</th>
+            <th>Título / Item</th>
+            <th>Texto</th>
+            <th>Ordem</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% itens.each do |item| %>
+            <tr>
+              <td>
+                <% if item.imagem.attached? %>
+                  <%= image_tag item.imagem, class: "admin-thumb" %>
+                <% else %>
+                  <div class="admin-thumb" style="background:#eef4f1"></div>
+                <% end %>
+              </td>
+              <td>
+                <strong><%= item.titulo.presence || "(sem título)" %></strong>
+                <% if item.subtitulo.present? %>
+                  <br><small style="color:var(--bc-muted)"><%= item.subtitulo %></small>
+                <% end %>
+              </td>
+              <td style="max-width:320px"><small><%= truncate(item.texto, length: 80) %></small></td>
+              <td><small><%= item.posicao %></small></td>
+              <td class="admin-actions">
+                <%= link_to "Editar", edit_conteudo_path(item), class: "admin-btn-ghost" %>
+                <%= button_to "Excluir", item, method: :delete, data: { turbo_confirm: "Excluir este item?" }, class: "admin-btn-danger" %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <div class="admin-empty" style="padding:18px 0">
+        <p style="margin:0">Seção ainda vazia.</p>
+      </div>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+current directory: /home/jpedro/Área de trabalho/conecta/Novo-Conecta/cms/vendor/bundle/ruby/3.4.0/gems/debug-1.11.1/ext/debug
+/usr/bin/ruby extconf.rb
+creating Makefile
+
+current directory: /home/jpedro/Área de trabalho/conecta/Novo-Conecta/cms/vendor/bundle/ruby/3.4.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260813-11319-8s498v sitelibdir\=./.gem.20260813-11319-8s498v clean
+
+current directory: /home/jpedro/Área de trabalho/conecta/Novo-Conecta/cms/vendor/bundle/ruby/3.4.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260813-11319-8s498v sitelibdir\=./.gem.20260813-11319-8s498v
+compiling debug.c
+compiling iseq_collector.c
+linking shared-object debug/debug.so
+
+current directory: /home/jpedro/Área de trabalho/conecta/Novo-Conecta/cms/vendor/bundle/ruby/3.4.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260813-11319-8s498v sitelibdir\=./.gem.20260813-11319-8s498v install
+/usr/bin/install -c -m 0755 debug.so ./.gem.20260813-11319-8s498v/debug
+
+current directory: /home/jpedro/Área de trabalho/conecta/Novo-Conecta/cms/vendor/bundle/ruby/3.4.0/gems/debug-1.11.1/ext/debug
+make DESTDIR\= sitearchdir\=./.gem.20260813-11319-8s498v sitelibdir\=./.gem.20260813-11319-8s498v clean

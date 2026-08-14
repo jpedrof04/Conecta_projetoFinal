@@ -1,0 +1,417 @@
+<div class="deco-field" aria-hidden="true">
+  <span class="deco-blob deco-blob-1"></span>
+  <span class="deco-blob deco-blob-2"></span>
+  <span class="deco-blob deco-blob-3"></span>
+</div>
+
+<div class="preloader">
+  <img src="/assets/images/logo.png" alt="Pre-loader Barracred Conecta">
+</div>
+
+<!-- NAVBAR -->
+<header class="site-header">
+  <nav class="navbar navbar-dark glass-nav" aria-label="Navegação principal">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand" href="#home" aria-label="Barracred Conecta">
+        <img class="navbar-brand-item" src="/assets/images/logo.png" alt="Logo Barracred Conecta">
+      </a>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav navbar-nav-scroll ms-auto align-items-lg-center">
+          <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">Quem Somos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#trilha">Jornada</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projetos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#who">Requisitos</a></li>
+          <li class="nav-item nav-cta ms-lg-3">
+            <a href="#getin" class="btn btn-sm btn-grad text-white mb-0">Faça Parte!</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section id="home" class="hero-section">
+    <div class="hero-video-bg">
+      <iframe
+        src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1&loop=1&playlist=LXb3EKWsInQ&controls=0&rel=0&modestbranding=1&showinfo=0"
+        title="Vídeo de fundo Barracred Conecta"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen>
+      </iframe>
+    </div>
+    <div class="fade-overlay"></div>
+    <div class="hero-orb hero-orb-one"></div>
+    <div class="hero-orb hero-orb-two"></div>
+    <div class="container hero-container">
+      <div class="row justify-content-center" style="min-height: 100vh !important; padding-top: 55vh;">
+        <div class="col-12 text-center">
+          <h1 class="display-1 logo-font mb-3" style="color: #fff; text-shadow: 0 2px 20px rgba(0,0,0,.4);"><%= @hero&.titulo %></h1>
+          <h2 class="display-6 fw-bold mb-4 hero-tagline"><%= @hero&.subtitulo %></h2>
+        </div>
+      </div>
+    </div>
+    <canvas class="position-absolute top-100 start-50 translate-middle mb-6 z-index-9" id="waveCanvas"></canvas>
+  </section>
+
+  <!-- MARQUEE STRIP -->
+  <div class="strip">
+    <div class="strip-track">
+      <% @strip.each do |s| %><span><%= s.titulo %></span><% end %>
+      <% @strip.each do |s| %><span><%= s.titulo %></span><% end %>
+    </div>
+  </div>
+
+  <!-- QUEM SOMOS -->
+  <% quem_somos_head = @quem_somos.first %>
+  <% quem_somos_img = @quem_somos.drop(1) %>
+  <section class="section-modern pt-md-8 about-section" id="about">
+    <div class="container z-in">
+      <div class="section-heading text-center mx-auto">
+        <span class="eyebrow">Quem Somos</span>
+        <h2><%= quem_somos_head&.titulo %></h2>
+      </div>
+      <div class="row align-items-stretch g-4">
+        <div class="col-lg-7">
+          <div class="glass-card content-card h-100 reveal-card">
+            <%= texto_paragrafos(quem_somos_head&.texto) %>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="mission-card bg-grad h-100 all-text-white reveal-card mission-card-carousel">
+            <div class="mission-slide active" id="missionSlideLogo">
+              <img class="mission-logo" src="<%= img_url(quem_somos_img[0]) %>" alt="Barracred">
+            </div>
+            <div class="mission-slide mission-slide-full" id="missionSlideBuilding">
+              <img src="<%= img_url(quem_somos_img[1]) %>" alt="Barracred">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="photo-strip mt-4">
+        <% quem_somos_img.drop(2).each_with_index do |tile, i| %>
+          <div class="photo-tile <%= "large" if i.zero? %>"><img src="<%= img_url(tile) %>" alt="Foto palestra"></div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE O PROGRAMA -->
+  <% sobre_head = @sobre.first %>
+  <% sobre_img = @sobre.drop(1) %>
+  <section class="section-modern program-section">
+    <div class="container">
+      <div class="row align-items-stretch g-4 glass-split program-split">
+        <div class="col-lg-5">
+          <div class="about-photo-grid">
+            <% sobre_img.each do |foto| %>
+              <div class="about-photo-card reveal-card">
+                <img src="<%= img_url(foto) %>" alt="Momentos do Barracred Conecta">
+              </div>
+            <% end %>
+          </div>
+        </div>
+        <div class="col-lg-7">
+          <div class="content-card ps-lg-3">
+            <span class="eyebrow">Sobre o programa</span>
+            <h2><%= sobre_head&.titulo %></h2>
+            <%= texto_paragrafos(sobre_head&.texto) %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- A TRILHA -->
+  <section class="section-modern trilha-section" id="trilha">
+    <div class="container">
+      <div class="section-heading text-center mx-auto">
+        <span class="eyebrow">A Jornada</span>
+        <h2>Uma trilha de 10 meses, em quatro grandes movimentos</h2>
+        <p>O programa caminha em blocos que se somam - cada etapa apoiada na anterior, até chegar na conexão com o mercado de trabalho.</p>
+      </div>
+      <div class="row g-4 justify-content-center flip-row">
+        <% @depoimentos.each do |d| %>
+          <div class="col-sm-6 col-lg-3">
+            <div class="flip-card">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <img src="<%= img_url(d) %>" alt="Foto <%= d.titulo %>">
+                  <div class="flip-card-info">
+                    <h5><%= d.titulo.split(" ").first %></h5>
+                    <span><%= d.subtitulo %></span>
+                  </div>
+                </div>
+                <div class="flip-card-back">
+                  <i class="bi bi-quote"></i>
+                  <p><%= d.texto %></p>
+                  <span class="flip-back-name"><%= d.titulo %>, <%= d.subtitulo %></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container" style="margin-top: 5rem;">
+      <div class="section-heading text-center mx-auto">
+        <h2>O que você vai aprender?</h2>
+      </div>
+      <div class="row g-4 mt-4">
+        <% @aprender.each do |a| %>
+          <div class="col-sm-6 col-lg-4">
+            <div class="feature-box h-100 icon-grad modern-feature-card">
+              <div class="feature-box-icon">
+                <img src="<%= img_url(a) %>" alt="<%= a.titulo %>">
+              </div>
+              <h3 class="feature-box-title"><%= a.titulo %></h3>
+              <p class="feature-box-desc"><%= a.texto %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJETOS -->
+  <section class="section-modern projects-section pt-md-8" id="projects">
+    <div class="container">
+      <div class="section-heading text-center mx-auto">
+        <span class="eyebrow">Projetos</span>
+        <h2><%= @projetos_head&.titulo %></h2>
+        <p><%= @projetos_head&.texto %></p>
+      </div>
+      <div class="row g-4 project-grid">
+        <% @projetos.each_with_index do |projeto, idx| %>
+          <% fotos = projeto.imagens.attached? ? projeto.imagens : (projeto.capa.attached? ? [projeto.capa] : []) %>
+          <% lead, bullets = split_descricao(projeto.descricao) %>
+          <div class="col-lg-6">
+            <article class="project-card h-100 <%= "featured-project" if idx.odd? %>">
+              <div class="project-media project-carousel-media">
+                <div class="tiny-slider arrow-hover project-carousel-wrap">
+                  <div class="tiny-slider-inner project-image-slider" data-arrow="true" data-dots="true" data-autoplay="true" data-autoplaytime="4800" data-hoverpause="true" data-gutter="0" data-loop="true" data-rewind="false" data-items-xl="1" data-items-lg="1" data-items-md="1" data-items-sm="1" data-items-xs="1">
+                    <% if fotos.any? %>
+                      <% fotos.each do |foto| %>
+                        <div class="item project-slide"><img src="<%= url_for(foto) %>" alt="<%= projeto.titulo %>"></div>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+              <div class="project-content">
+                <h3><%= projeto.titulo %></h3>
+                <p><%= lead %></p>
+                <ul class="project-list">
+                  <% bullets.each do |b| %><li><%= b %></li><% end %>
+                </ul>
+              </div>
+            </article>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- TURMAS -->
+  <section class="section-modern classes-section pt-md-8" id="turmas">
+    <div class="container">
+      <div class="section-heading text-center mx-auto">
+        <span class="eyebrow">Turmas</span>
+        <h2><%= @turmas_head&.titulo %></h2>
+        <p><%= @turmas_head&.texto %></p>
+      </div>
+      <div class="tiny-slider classes-carousel-wrap">
+        <div class="tiny-slider-inner classes-slider" data-arrow="true" data-dots="true" data-autoplay="true" data-autoplaytime="4500" data-hoverpause="true" data-gutter="24" data-items-xl="2" data-items-lg="2" data-items-md="1" data-items-sm="1" data-items-xs="1">
+          <% @turmas.each_with_index do |t, i| %>
+            <div class="item">
+              <article class="class-card <%= "class-featured" if i.odd? %>">
+                <img src="<%= img_url(t) %>" alt="<%= t.titulo %>">
+                <div class="class-card-badge"><%= t.titulo %></div>
+              </article>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALERIA -->
+  <% galeria_fotos = @galeria.to_a %>
+  <% galeria_primeira = galeria_fotos.first(8) %>
+  <% galeria_segunda = galeria_fotos.drop(8) %>
+  <section class="section-modern gallery-section pt-md-8" id="galeria">
+    <div class="container-fluid">
+      <div class="section-heading text-center mx-auto">
+        <span class="eyebrow">Galeria</span>
+        <h2><%= @galeria_head&.titulo %></h2>
+        <p><%= @galeria_head&.texto %></p>
+      </div>
+      <div class="gallery-track">
+        <% galeria_primeira.each do |foto| %>
+          <div class="gallery-cell"><img src="<%= img_url(foto) %>" alt="<%= foto.titulo %>"><span class="gallery-cap"></span></div>
+        <% end %>
+      </div>
+      <div class="gallery-track gallery-track-reverse">
+        <% galeria_segunda.each do |foto| %>
+          <div class="gallery-cell"><img src="<%= img_url(foto) %>" alt="<%= foto.titulo %>"><span class="gallery-cap"></span></div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPE -->
+  <section class="section-modern team-section pt-md-8" id="team">
+    <div class="container">
+      <div class="row align-items-center g-4 mb-5">
+        <div class="col-lg-5">
+          <span class="eyebrow">Equipe</span>
+          <h2><%= @equipe_head&.titulo %></h2>
+          <%= texto_paragrafos(@equipe_head&.texto) %>
+        </div>
+        <div class="col-lg-7">
+          <div class="image-frame team-cover">
+            <img class="img-cover" src="<%= img_url(@equipe_head) %>" alt="Foto Equipe Geral">
+          </div>
+        </div>
+      </div>
+      <div class="tiny-slider arrow-hover team-carousel-wrap">
+        <div class="tiny-slider-inner team social-hover team-overlay" data-arrow="true" data-dots="false" data-autoplay="5000" data-hoverpause="true" data-items-xl="4" data-items-lg="3" data-items-md="2" data-items-xs="1">
+          <% @equipe.each do |membro| %>
+            <div class="item">
+              <div class="team-item modern-team-card mb-0 text-center">
+                <div class="team-avatar"><img src="<%= img_url(membro) %>" alt="Foto <%= membro.titulo %>"></div>
+                <div class="team-desc">
+                  <h5><%= membro.titulo %></h5>
+                  <span><%= membro.subtitulo %></span>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUEM PODE PARTICIPAR -->
+  <section class="section-modern pt-md-8 pb-0" id="who">
+    <div class="container">
+      <div class="row g-4 align-items-stretch glass-split participation-box">
+        <div class="col-lg-6">
+          <div class="image-frame h-100">
+            <img class="img-cover" src="<%= img_url(@participar) %>" alt="Jovens em atividade">
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="dark-glass-card all-text-white h-100">
+            <h2 class="mb-4"><%= @participar&.titulo %></h2>
+            <%= texto_paragrafos(@participar&.texto, list_class: "modern-check-list light-list") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / INSCREVA-SE -->
+  <section class="section-modern pt-md-8" id="getin">
+    <div class="container">
+      <div class="cta-shell glass-card shadow-lg overflow-hidden">
+        <div class="row g-0 align-items-stretch">
+          <% cta_painel_inscricao = @cta.find { |c| c.subtitulo == "painel_inscricao" } || @cta.first %>
+          <% cta_painel_parceiro = @cta.find { |c| c.subtitulo == "painel_parceiro" } || @cta.second %>
+          <div class="col-lg-6 bg-white-soft">
+            <div class="cta-panel h-100 p-4 p-md-5">
+              <div class="cta-icon"><img src="<%= img_url(cta_painel_inscricao) %>" alt="Alunos" style="width:48px;height:48px;object-fit:contain;"></div>
+              <h3 class="mb-3"><%= cta_painel_inscricao&.titulo %></h3>
+              <%= texto_paragrafos(cta_painel_inscricao&.texto) %>
+              <div class="d-flex flex-wrap gap-3">
+                <% if cta_painel_inscricao&.botao_link.present? %>
+                  <a href="<%= cta_painel_inscricao.botao_link %>" class="btn btn-grad text-white mb-0" target="_blank" rel="noopener"><%= cta_painel_inscricao.botao_texto.presence || "Quero me inscrever" %></a>
+                <% end %>
+                <button type="button" class="btn btn-outline-modern mb-0" data-bs-toggle="modal" data-bs-target="#myModal">Candidatos classificados</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 d-flex">
+            <div class="cta-panel bg-grad pattern-overlay-2 h-100 all-text-white p-4 p-md-5">
+              <div class="cta-icon light-icon"><img src="<%= img_url(cta_painel_parceiro) %>" alt="Parceiros" style="width:48px;height:48px;object-fit:contain;"></div>
+              <h3><%= cta_painel_parceiro&.titulo %></h3>
+              <%= texto_paragrafos(cta_painel_parceiro&.texto) %>
+              <% if cta_painel_parceiro&.botao_link.present? %>
+                <a href="<%= cta_painel_parceiro.botao_link %>" class="btn btn-dark mb-0" target="_blank" rel="noopener"><%= cta_painel_parceiro.botao_texto.presence || "Fale conosco no WhatsApp" %></a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<% contato = split_contato(@footer&.texto) %>
+<footer class="footer footer-dark section-pt modern-footer">
+  <div class="footer-content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-9 mx-auto">
+          <div class="widget text-center mt-5 glass-footer-card">
+            <a href="#home" class="footer-logo mb-3 d-block">
+              <img src="/assets/images/logo.png" alt="Logo Barracred Conecta" class="footer-logo-img">
+            </a>
+            <p class="mt-3"><%= @footer&.titulo %></p>
+            <ul class="footer-contact p-0 list-inline">
+              <% if contato[:endereco].present? %>
+                <li class="list-inline-item me-4"><div class="d-flex align-items-center"><i class="me-2 ti-map-alt fs-3"></i> <%= contato[:endereco] %></div></li>
+              <% end %>
+              <% if contato[:telefone].present? %>
+                <li class="list-inline-item me-4"><div class="d-flex align-items-center"><i class="me-2 ti-headphone-alt fs-3"></i> <a href="tel:<%= contato[:telefone].gsub(/\D/, "") %>"><%= contato[:telefone] %></a></div></li>
+              <% end %>
+              <% if contato[:email].present? %>
+                <li class="list-inline-item me-4"><div class="d-flex align-items-center"><i class="me-2 ti-email fs-3"></i> <a href="mailto:<%= contato[:email] %>"><%= contato[:email] %></a></div></li>
+              <% end %>
+            </ul>
+            <div class="divider my-3"></div>
+            <div class="copyright-links my-2">
+              <ul class="list-inline">
+                <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#home">Home</a></li>
+                <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#about">Quem Somos</a></li>
+                <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#projects">Projetos</a></li>
+                <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#who">Como Participar</a></li>
+                <li class="list-inline-item ps-2"><a class="list-group-item-action pe-0" href="#getin">Faça Parte</a></li>
+              </ul>
+            </div>
+            <div class="copyright-text">&copy;2026 Todos os Direitos Reservados <a href="https://www.barracredconecta.com.br/"> Barracred Conecta</a>.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- MODAL CANDIDATOS -->
+<div class="modal fade modern-modal" id="myModal" tabindex="-1" aria-labelledby="modalGabaritoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalGabaritoLabel">Candidatos Classificados</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5>Nos próximos dias, entraremos em contato com os candidatos classificados para agendamento da entrevista social, que acontecerá com um responsável legal ou familiar.</h5>
+        <iframe src="/assets/data/Classificados.pdf" width="100%" height="500" style="border:none;" title="Candidatos Classificados"></iframe>
+        <a href="/assets/data/Classificados.pdf" class="btn btn-success mt-3" target="_blank" download>Baixar Lista (PDF)</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<a href="#home" class="back-top" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
+
+<script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/tiny-slider/tiny-slider.js"></script>
+<script src="/assets/js/index.js"></script>

@@ -1,0 +1,53 @@
+<% content_for :title, "Professores" %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title">Professores</h2>
+    <%= link_to "+ Novo Professor", new_professor_path, class: "admin-btn" %>
+  </div>
+
+  <% if @professors.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nome</th>
+          <th>Matéria</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @professors.each do |professor| %>
+          <tr>
+            <td>
+              <% if professor.foto.attached? %>
+                <%= image_tag professor.foto, class: "admin-thumb" %>
+              <% else %>
+                <div class="admin-thumb" style="background:#eef4f1"></div>
+              <% end %>
+            </td>
+            <td><strong><%= professor.nome %></strong></td>
+            <td><%= professor.materia %></td>
+            <td>
+              <% if professor.ativo? %>
+                <span class="admin-badge admin-badge-on">Ativo</span>
+              <% else %>
+                <span class="admin-badge admin-badge-off">Inativo</span>
+              <% end %>
+            </td>
+            <td class="admin-actions">
+              <%= link_to "Editar", edit_professor_path(professor), class: "admin-btn-ghost" %>
+              <%= button_to "Excluir", professor, method: :delete, data: { turbo_confirm: "Excluir este professor?" }, class: "admin-btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="admin-empty">
+      <p>Nenhum professor cadastrado ainda.</p>
+      <%= link_to "Cadastrar primeiro professor", new_professor_path, class: "admin-btn" %>
+    </div>
+  <% end %>
+</div>

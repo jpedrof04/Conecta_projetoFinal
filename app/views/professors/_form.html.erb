@@ -1,0 +1,47 @@
+<%= form_with(model: professor, class: "admin-form") do |form| %>
+  <% if professor.errors.any? %>
+    <div class="admin-alert admin-alert-err">
+      <strong><%= pluralize(professor.errors.count, "erro") %> impediram o salvamento:</strong>
+      <ul>
+        <% professor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="admin-field">
+      <%= form.label :nome, "Nome completo" %>
+      <%= form.text_field :nome, required: true %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :materia, "Matéria / Área" %>
+      <%= form.text_field :materia, placeholder: "Ex.: Tecnologia da Informação" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :bio, "Biografia / Mini bio" %>
+      <%= form.textarea :bio, placeholder: "Fale um pouco sobre o professor..." %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :foto, "Foto do professor" %>
+      <% if professor.foto.attached? %>
+        <span class="admin-photo-preview"><%= image_tag professor.foto %></span>
+      <% end %>
+      <%= form.file_field :foto, accept: "image/*" %>
+    </div>
+
+    <div class="admin-field admin-check">
+      <%= form.checkbox :ativo, checked: professor.ativo != false %>
+      <%= form.label :ativo, "Professor ativo (aparece no site)" %>
+    </div>
+  </div>
+
+  <div class="admin-form-actions">
+    <%= form.submit professor.persisted? ? "Salvar alterações" : "Criar professor", class: "admin-btn" %>
+    <%= link_to "Cancelar", professors_path, class: "admin-btn-ghost" %>
+  </div>
+<% end %>

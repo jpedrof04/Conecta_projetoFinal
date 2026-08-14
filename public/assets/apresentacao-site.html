@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barracred Conecta — Apresentação do novo site</title>
+
+<!-- =============================================================
+     BARRACRED CONECTA — APRESENTAÇÃO DO PROJETO (v2)
+     -------------------------------------------------------------
+     COMO USAR:
+     · Teclado: setas ◀ ▶ / Espaço para navegar
+     · N  = abrir/fechar as notas do apresentador
+     · F  = tela cheia
+     · P  = imprimir / exportar em PDF (slides limpos, sem notas)
+
+     COMO EDITAR:
+     · Abra este arquivo em qualquer editor de texto.
+     · Procure pelos campos marcados com  [  ...  ]  e substitua
+       pelos nomes reais, endereço do site e QR Code.
+     · Substitua os avisos  [INSERIR CAPTURA ...]  por imagens
+       (basta trocar o <img> pelo print do site).
+     · Nomes dos integrantes: os cinco campos [NOME DO INTEGRANTE N]
+       estão nos slides 4 e 6 — troque uma única vez se quiser
+       (use a busca do editor com Ctrl+F).
+     ============================================================= -->
+
+<!-- ==================== FONTES ==================== -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fonts/coolvetica.css">
+
+<style>
+/* ==================== DESIGN TOKENS ==================== */
+:root{
+  --bc-primary:#3bbd80;
+  --bc-primary-dark:#0f7a56;
+  --bc-primary-deep:#07503c;
+  --bc-primary-bright:#6fe0a8;
+  --bc-primary-tint:#eafaf2;
+  --bc-dark:#063024;
+  --bc-deep:#03110e;
+  --bc-text:#163029;
+  --bc-muted:#5d716a;
+  --bc-offwhite:#f4fbf7;
+  --lime:#c3e34e;
+  --lime-deep:#8fb62c;
+  --coral:#3b6bc4;
+  --coral-deep:#254287;
+  --coral-orange:#ff5a45;
+  --indigo:#1c2a5e;
+  --line:rgba(11,64,46,.12);
+  --bc-border:rgba(59,189,128,.22);
+  --bc-shadow:0 18px 50px rgba(7,64,46,.10);
+  --bc-shadow-strong:0 26px 70px rgba(4,48,34,.16);
+  --r-lg:24px;
+  --r-xl:32px;
+  --r-pill:999px;
+  --display:"Space Grotesk",sans-serif;
+  --body:"Poppins",sans-serif;
+  --mono:"JetBrains Mono",monospace;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--body);
+  background:var(--bc-deep);
+  color:var(--bc-text);
+  overflow:hidden;
+}
+
+/* ==================== STAGE 16:9 ==================== */
+.stage{
+  position:relative;
+  width:1280px;height:720px;
+  transform-origin:top left;
+}
+.slide{
+  position:absolute;inset:0;
+  opacity:0;visibility:hidden;
+  transition:opacity .5s ease,visibility .5s;
+  overflow:hidden;
+}
+.slide.active{opacity:1;visibility:visible}
+
+/* ==================== ELEMENTOS BASE ==================== */
+.eyebrow{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.45rem 1.1rem .45rem .8rem;
+  border-radius:var(--r-pill);
+  background:rgba(59,189,128,.10);
+  border:1px solid var(--bc-border);
+  color:var(--bc-primary-dark);
+  font-size:12px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;
+}
+.eyebrow::before{content:"";width:22px;height:4px;border-radius:999px;background:linear-gradient(90deg,var(--bc-primary),var(--bc-primary-dark))}
+.eyebrow.on-dark{background:rgba(255,255,255,.10);border-color:rgba(255,255,255,.22);color:#fff}
+.eyebrow.on-dark::before{background:var(--lime)}
+
+h1,h2,h3{font-family:var(--display);color:var(--bc-dark);letter-spacing:-.035em;line-height:1.05}
+.slide h1.title{font-size:52px;font-weight:700;max-width:900px}
+.logo-font{font-family:'Coolvetica',var(--display);font-weight:900}
+
+.badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.5rem 1rem;border-radius:var(--r-pill);
+  font-weight:700;font-size:13px;
+  background:linear-gradient(135deg,var(--bc-primary),var(--bc-primary-dark));
+  color:#fff;box-shadow:0 10px 22px rgba(15,122,86,.30);
+}
+.badge.ghost{border:1px solid rgba(255,255,255,.28);background:rgba(255,255,255,.10);box-shadow:none;color:#fff}
+.badge.mono{font-family:var(--mono);font-size:12px;letter-spacing:.02em;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);color:#fff;box-shadow:none}
+.badge.coral{background:var(--coral-orange);box-shadow:0 10px 22px rgba(255,90,69,.35)}
+.badge.blue{background:var(--coral);box-shadow:0 10px 22px rgba(59,107,196,.3)}
+.badge.lime{background:var(--lime);color:var(--bc-deep);box-shadow:0 10px 22px rgba(195,227,78,.25)}
+
+.mono{font-family:var(--mono)}
+.muted{color:var(--bc-muted)}
+.tiny{font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--bc-muted)}
+p.body{font-size:15px;line-height:1.75;color:var(--bc-muted)}
+
+/* ==================== GLASS ==================== */
+.glass{
+  background:rgba(255,255,255,.72);
+  border:1px solid var(--bc-border);
+  border-radius:var(--r-lg);
+  box-shadow:var(--bc-shadow);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+}
+
+/* ==================== SLIDE 1 — ABERTURA (escuro) ==================== */
+.s1{background:url(assets/images/banner/1.jpg) center/cover no-repeat;color:#fff}
+.s1::before{content:"";position:absolute;inset:0;z-index:1;
+  background:linear-gradient(100deg,rgba(3,17,14,.92) 0%,rgba(3,17,14,.72) 45%,rgba(3,17,14,.42) 100%),
+    radial-gradient(circle at 20% 25%,rgba(76,189,137,.28),transparent 30rem)}
+.s1::after{content:"";position:absolute;left:0;right:0;bottom:0;height:150px;z-index:2;
+  background:linear-gradient(180deg,transparent,rgba(3,17,14,.75))}
+.s1 .wrap{position:relative;z-index:3;height:100%;padding:64px 84px 72px;display:flex;flex-direction:column}
+.s1-top{display:flex;align-items:center;justify-content:space-between}
+.s1-logo{display:flex;align-items:center;gap:14px}
+.s1-logo img{height:46px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.4))}
+.s1-hero{flex:1;display:flex;flex-direction:column;justify-content:center;padding-top:10px}
+.s1-eyebrow{align-self:flex-start;margin-bottom:22px}
+.s1-title{color:#fff;font-size:92px;line-height:.95;font-weight:700;text-shadow:0 12px 40px rgba(0,0,0,.4)}
+.s1-sub{margin-top:22px;font-size:30px;font-weight:700;letter-spacing:-.02em;color:rgba(255,255,255,.96)}
+.s1-sub .hl{background:linear-gradient(120deg,var(--bc-primary-bright),#ffffff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.s1-impact{margin-top:34px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.s1-impact .line{width:52px;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--lime),transparent)}
+.s1-impact span{font-family:var(--display);font-size:17px;font-weight:600;color:rgba(255,255,255,.88);letter-spacing:.02em}
+.s1-impact .sep{color:var(--lime);font-size:14px}
+.s1-foot{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.s1-team{display:flex;flex-direction:column;gap:8px}
+.s1-team b{font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65);font-weight:700}
+.s1-team .badge{font-size:12px}
+.s1-count{font-family:var(--mono);font-size:11px;letter-spacing:.18em;color:rgba(255,255,255,.55);text-transform:uppercase}
+
+/* ==================== SLIDE 2 — CONTEXTO (claro) ==================== */
+.light{background:var(--bc-offwhite)}
+.light .grid-bg{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(59,189,128,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(59,189,128,.05) 1px,transparent 1px);
+  background-size:46px 46px;opacity:.7;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 80%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.85),transparent 80%)}
+.light .blob{position:absolute;border-radius:50%;filter:blur(70px);opacity:.5;pointer-events:none}
+.blob-a{width:30rem;height:30rem;top:-8rem;right:-8rem;background:radial-gradient(circle,rgba(59,189,128,.4),transparent 70%)}
+.blob-b{width:24rem;height:24rem;bottom:-6rem;left:-6rem;background:radial-gradient(circle,rgba(111,224,168,.38),transparent 70%)}
+
+.pad{padding:70px 84px;position:relative;z-index:2;height:100%;display:flex;flex-direction:column}
+.s2-title{max-width:700px;margin-top:16px}
+.obj-grid{margin-top:26px;display:grid;grid-template-columns:1fr;gap:12px;max-width:640px}
+.obj{display:flex;align-items:center;gap:16px;padding:14px 18px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 12px 30px rgba(7,64,46,.06)}
+.obj .n{flex:none;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-weight:700;font-size:15px;color:#fff;background:linear-gradient(135deg,var(--bc-primary),var(--bc-primary-dark))}
+.obj .n.b2{background:var(--coral)}
+.obj .n.b3{background:var(--coral-orange)}
+.obj b{font-family:var(--display);font-size:16px;color:var(--bc-dark);letter-spacing:-.01em}
+.s2-right{position:absolute;top:50%;right:64px;transform:translateY(-50%);width:470px;z-index:2}
+.s2-frame{background:#fff;border:1px solid var(--bc-border);border-radius:var(--r-lg);box-shadow:var(--bc-shadow);overflow:hidden}
+.s2-frame .bar{height:34px;background:var(--bc-dark);display:flex;align-items:center;gap:6px;padding:0 14px}
+.s2-frame .bar i{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.25)}
+.s2-frame .bar i:first-child{background:var(--coral-orange)}
+.s2-frame .bar i:nth-child(2){background:var(--lime)}
+.s2-frame .bar i:nth-child(3){background:var(--bc-primary)}
+.s2-frame .shot{background:#fbfdf7;padding:10px;border-bottom:1px solid var(--line)}
+.s2-frame .shot img{width:100%;height:auto;display:block;border-radius:8px}
+
+/* ==================== SLIDE — COMPARATIVO ANTES/DEPOIS (claro) ==================== */
+.scmp-title{max-width:820px;margin-top:16px}
+.scmp-grid{flex:1;display:flex;align-items:center;justify-content:center;gap:36px;padding-top:10px}
+.scmp-card{width:430px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.scmp-label{display:inline-flex;align-items:center;gap:10px;padding:.55rem 1.2rem;border-radius:var(--r-pill);background:#fff;border:1px solid var(--bc-border);font-family:var(--display);font-weight:700;font-size:14px;color:var(--bc-dark);box-shadow:0 10px 24px rgba(7,64,46,.08)}
+.scmp-label .dot{width:10px;height:10px;border-radius:50%;flex:none}
+.scmp-label .dot.old{background:var(--bc-muted)}
+.scmp-label .dot.new{background:var(--bc-primary);box-shadow:0 0 0 3px rgba(59,189,128,.22)}
+.scmp-frame{width:100%}
+.scmp-vs{flex:none;display:grid;place-items:center;width:56px;height:56px;border-radius:50%;background:#fff;border:2px solid var(--bc-primary);color:var(--bc-primary-dark);font-size:22px;font-family:var(--display);box-shadow:0 12px 30px rgba(7,64,46,.12)}
+
+/* ==================== SLIDE 3 — MELHORIAS (claro) ==================== */
+.s3-title{max-width:880px;margin-top:16px}
+.pillars{flex:1;display:flex;align-items:center;gap:26px;padding-top:8px}
+.pillar{flex:1;border-radius:var(--r-xl);padding:34px 30px;display:flex;flex-direction:column;gap:14px;
+  background:rgba(255,255,255,.72);border:1px solid var(--bc-border);box-shadow:var(--bc-shadow);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.pillar.mid{transform:translateY(18px);background:rgba(255,255,255,.86)}
+.pillar.flat{transform:translateY(6px)}
+.pillar .ic{width:64px;height:64px;border-radius:18px;display:grid;place-items:center;background:#fff;border:2px solid var(--bc-primary);box-shadow:0 6px 18px rgba(59,189,128,.16)}
+.pillar .ic svg{width:30px;height:30px;stroke:var(--bc-primary-dark);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pillar.b2 .ic{border-color:var(--coral)} .pillar.b2 .ic svg{stroke:var(--coral-deep)}
+.pillar.b3 .ic{border-color:var(--coral-orange)} .pillar.b3 .ic svg{stroke:var(--coral-deep-orange,var(--coral-orange))}
+.pillar h3{font-size:22px;font-weight:700}
+.pillar p{font-size:13.5px;line-height:1.7;color:var(--bc-muted)}
+.pillar .k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:var(--bc-muted);text-transform:uppercase}
+.pillar .tick{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--bc-primary-dark)}
+.pillar .tick::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--bc-primary)}
+.pillar.b2 .tick{color:var(--coral-deep)} .pillar.b2 .tick::before{background:var(--coral)}
+.pillar.b3 .tick{color:var(--coral-deep-orange,var(--coral-orange))} .pillar.b3 .tick::before{background:var(--coral-orange)}
+.s3-message{margin-top:26px;position:relative;z-index:2;text-align:center}
+.s3-message .inner{display:inline-flex;gap:12px;align-items:center;padding:14px 24px;border-radius:var(--r-pill);background:var(--bc-dark);color:#fff;box-shadow:0 18px 44px rgba(6,48,36,.3)}
+.s3-message .inner span{font-family:var(--display);font-size:15px;font-weight:600;color:rgba(255,255,255,.96)}
+.s3-message .inner .dot{width:8px;height:8px;border-radius:50%;background:var(--lime)}
+
+/* ==================== SLIDE 4 — EQUIPE (claro/tint) ==================== */
+.s4{background:linear-gradient(160deg,#f2faf4 0%,#eaf5ec 55%,#e6f1ea 100%)}
+.s4-title{max-width:900px;margin-top:16px}
+.s4-journey{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;padding-top:30px}
+.s4-track{position:absolute;left:20px;right:20px;top:41.5px;height:3px;background:repeating-linear-gradient(90deg,rgba(11,64,46,.18) 0 10px,transparent 10px 20px)}
+.s4-stops{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:2}
+.s4-stop{display:flex;flex-direction:column;align-items:center;text-align:center;gap:16px}
+.s4-disc{width:86px;height:86px;border-radius:50%;background:#fff;position:relative;z-index:1;border:4px solid var(--bc-primary);display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 12px 30px rgba(7,64,46,.12);font-family:var(--mono);color:var(--bc-primary-dark);font-weight:700;gap:1px}
+.s4-disc b{font-size:20px}
+.s4-disc span{font-size:9px;text-transform:uppercase;letter-spacing:.06em;opacity:.7}
+.s4-stop.d2 .s4-disc{border-color:var(--coral);color:var(--coral-deep)}
+.s4-stop.d3 .s4-disc{border-color:var(--bc-primary-dark)}
+.s4-stop.d4 .s4-disc{border-color:var(--coral-orange);color:var(--coral-deep-orange,var(--coral-orange))}
+.s4-label{padding:.55rem 1.05rem;border-radius:var(--r-pill);background:#fff;border:1px solid var(--bc-border);font-family:var(--display);font-size:14px;font-weight:700;color:var(--bc-dark);box-shadow:0 10px 24px rgba(7,64,46,.08)}
+.s4-text{margin-top:26px;text-align:center;max-width:760px;margin-left:auto;margin-right:auto}
+.s4-team{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+.s4-team .member{display:flex;align-items:center;gap:10px;padding:.6rem 1.05rem;border-radius:var(--r-pill);background:#fff;border:1px solid var(--line);font-weight:700;font-size:13px;color:var(--bc-text);box-shadow:0 8px 20px rgba(7,64,46,.06)}
+.s4-team .member::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--bc-primary);box-shadow:0 0 0 3px rgba(59,189,128,.2)}
+.s4-team .member:nth-child(2)::before{background:var(--coral);box-shadow:0 0 0 3px rgba(59,107,196,.2)}
+.s4-team .member:nth-child(3)::before{background:var(--lime-deep);box-shadow:0 0 0 3px rgba(143,182,44,.2)}
+.s4-team .member:nth-child(4)::before{background:var(--bc-primary-dark);box-shadow:0 0 0 3px rgba(15,122,86,.2)}
+.s4-team .member:nth-child(5)::before{background:var(--coral-orange);box-shadow:0 0 0 3px rgba(255,90,69,.2)}
+
+/* ==================== SLIDE 5 — DEMONSTRAÇÃO (escuro/tech) ==================== */
+.s5{background:linear-gradient(160deg,var(--bc-dark) 0%,var(--bc-deep) 100%);color:#fff}
+.s5::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(111,224,168,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(111,224,168,.05) 1px,transparent 1px);background-size:46px 46px;opacity:.5;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 70%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 70%)}
+.s5 .glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none}
+.s5 .glow.g1{width:28rem;height:28rem;top:-6rem;left:-8rem;background:radial-gradient(circle,rgba(59,189,128,.3),transparent 70%)}
+.s5 .glow.g2{width:26rem;height:26rem;bottom:-6rem;right:-6rem;background:radial-gradient(circle,rgba(111,224,168,.24),transparent 70%)}
+.s5 .pad{color:#fff}
+.s5-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px}
+.s5-title{color:#fff;font-size:46px;margin-top:14px}
+.s5-stage{flex:1;display:flex;align-items:center;justify-content:center;position:relative;padding-top:10px}
+.laptop{width:640px;position:relative}
+.laptop .screen{border-radius:18px;padding:10px;background:linear-gradient(160deg,#0b3a2a,#041a13);border:1px solid rgba(111,224,168,.3);box-shadow:0 30px 70px rgba(0,0,0,.55),inset 0 0 0 1px rgba(255,255,255,.06)}
+.laptop .screen .inner{border-radius:10px;background:#f2faf4;overflow:hidden;position:relative}
+.laptop .screen .inner img{width:100%;height:auto;display:block}
+.laptop .screen .inner .ph{font-family:var(--mono);font-size:12px;letter-spacing:.06em;color:var(--bc-muted);text-align:center;line-height:1.7;padding:0 20px}
+.laptop .base{height:16px;background:linear-gradient(180deg,#0d4432,#072b1f);border-radius:0 0 16px 16px;margin:0 8%;box-shadow:0 14px 34px rgba(0,0,0,.4);position:relative}
+.laptop .base::after{content:"";position:absolute;left:12%;right:12%;top:0;height:4px;background:linear-gradient(180deg,rgba(255,255,255,.22),transparent)}
+.phone{width:140px;position:absolute;right:14%;bottom:6%;z-index:3;border-radius:20px;padding:8px;background:linear-gradient(160deg,#0b3a2a,#041a13);border:1px solid rgba(111,224,168,.3);box-shadow:0 26px 60px rgba(0,0,0,.55)}
+.phone .inner{border-radius:13px;background:#f2faf4;overflow:hidden}
+.phone .inner img{width:100%;height:auto;display:block}
+.phone .inner .ph{font-family:var(--mono);font-size:8.5px;letter-spacing:.04em;color:var(--bc-muted);text-align:center;line-height:1.6;padding:0 6px}
+.s5-tags{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:8px}
+.s5-meta{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:18px}
+.s5-live{display:flex;align-items:center;gap:14px}
+.live-pill{display:inline-flex;align-items:center;gap:9px;padding:.6rem 1.1rem;border-radius:var(--r-pill);background:rgba(255,255,255,.08);border:1px solid rgba(111,224,168,.35);color:#fff;font-weight:700;font-size:13px}
+.live-pill .pulse{width:9px;height:9px;border-radius:50%;background:var(--lime);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(195,227,78,.5)}70%{box-shadow:0 0 0 9px rgba(195,227,78,0)}100%{box-shadow:0 0 0 0 rgba(195,227,78,0)}}
+.qr-ph{width:64px;height:64px;border-radius:14px;background:#fff;display:grid;place-items:center;padding:8px}
+.qr-ph span{font-family:var(--mono);font-size:8px;letter-spacing:.04em;color:var(--bc-muted);text-align:center;line-height:1.5}
+
+/* ==================== SLIDE 6 — ENCERRAMENTO (escuro/elegante) ==================== */
+.s6{background:linear-gradient(165deg,var(--bc-dark) 0%,var(--bc-deep) 100%);color:#fff}
+.s6::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(rgba(111,224,168,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(111,224,168,.05) 1px,transparent 1px);background-size:46px 46px;opacity:.4;
+  -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 75%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.9),transparent 75%)}
+.s6 .glow{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none}
+.s6 .glow.g1{width:30rem;height:30rem;top:-10rem;right:-8rem;background:radial-gradient(circle,rgba(59,189,128,.28),transparent 70%)}
+.s6 .glow.g2{width:24rem;height:24rem;bottom:-8rem;left:-6rem;background:radial-gradient(circle,rgba(111,224,168,.22),transparent 70%)}
+.s6 .pad{color:#fff;padding:60px 74px}
+.s6-top{display:flex;justify-content:space-between;align-items:flex-start}
+.s6-title{color:#fff;font-size:38px;max-width:700px;margin-top:12px}
+.s6-card{margin-top:26px;flex:1;display:flex;gap:30px}
+.s6-card .glass{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);padding:26px 28px;border-radius:var(--r-xl);backdrop-filter:blur(18px)}
+.s6-col{flex:1.2}
+.s6-col h4{font-family:var(--display);font-size:14px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);margin-bottom:14px;font-weight:700}
+.s6-check{list-style:none;display:flex;flex-direction:column;gap:11px}
+.s6-check li{display:flex;gap:12px;align-items:flex-start;font-family:var(--display);font-weight:600;font-size:15px;color:rgba(255,255,255,.95);line-height:1.4}
+.s6-check li::before{content:"";flex:none;width:22px;height:22px;border-radius:50%;margin-top:1px;background:linear-gradient(135deg,var(--bc-primary),var(--bc-primary-dark));display:grid;place-items:center;color:#fff;font-weight:900;font-size:12px;content:"✓"}
+.s6-next{display:flex;flex-direction:column;gap:10px}
+.s6-next li{display:flex;gap:12px;align-items:flex-start;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.88);line-height:1.45}
+.s6-next li .dot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:5px;background:var(--bc-primary)}
+.s6-next li:nth-child(2) .dot{background:var(--coral)}
+.s6-next li:nth-child(3) .dot{background:var(--coral-orange)}
+.s6-next li small{display:block;font-weight:400;color:rgba(255,255,255,.55);font-size:12px}
+.s6-col.qr{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px}
+.s6-col.qr .qr{width:150px;height:150px;border-radius:22px;background:#fff;display:grid;place-items:center;padding:16px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.s6-col.qr .qr span{font-family:var(--mono);font-size:11px;letter-spacing:.04em;color:var(--bc-muted);text-align:center;line-height:1.6}
+.s6-col.qr .url{font-family:var(--mono);font-size:13px;color:var(--bc-primary-bright);letter-spacing:.02em;border:1px solid rgba(111,224,168,.35);padding:.55rem 1.1rem;border-radius:999px}
+.s6-final{margin-top:22px;text-align:center;font-family:var(--display);font-size:21px;font-weight:700;color:#fff;letter-spacing:-.01em}
+.s6-final .hl{background:linear-gradient(120deg,var(--bc-primary-bright),#fff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.s6-foot{margin-top:20px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.s6-team{display:flex;gap:16px;flex-wrap:wrap}
+.s6-team span{font-size:12px;font-weight:700;color:rgba(255,255,255,.8);font-family:var(--display)}
+.s6-team span::after{content:"·";color:var(--lime);margin-left:14px}
+.s6-team span:last-child::after{content:""}
+.s6-thanks{font-size:12px;color:rgba(255,255,255,.62);font-weight:600;line-height:1.6;max-width:340px;text-align:right}
+.s6-logo img{height:40px;filter:drop-shadow(0 6px 16px rgba(0,0,0,.45))}
+
+/* ==================== UI (navegação/progresso) ==================== */
+.ui{position:fixed;left:50%;transform:translateX(-50%);bottom:14px;display:flex;align-items:center;gap:10px;z-index:50;padding:8px 12px;border-radius:999px;background:rgba(3,17,14,.6);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px)}
+.ui .dots{display:flex;gap:7px}
+.ui .dots i{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.25);cursor:pointer;transition:all .25s}
+.ui .dots i.on{background:var(--lime);width:22px;border-radius:999px}
+.ui .count{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.6);letter-spacing:.1em}
+.hint{position:fixed;right:16px;bottom:16px;font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;color:rgba(255,255,255,.35);z-index:50;text-align:right;line-height:1.7}
+.hint b{color:rgba(255,255,255,.6)}
+
+/* ==================== NOTAS DO APRESENTADOR ==================== */
+.notes{position:fixed;left:50%;bottom:64px;transform:translateX(-50%) translateY(20px);width:min(900px,92vw);max-height:60vh;overflow:auto;z-index:60;
+  background:rgba(3,17,14,.94);border:1px solid rgba(255,255,255,.14);border-radius:22px;box-shadow:0 30px 80px rgba(0,0,0,.5);padding:26px 30px;
+  opacity:0;visibility:hidden;transition:all .3s}
+.notes.open{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.notes .tag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--bc-deep);background:var(--lime);padding:.3rem .7rem;border-radius:999px;margin-bottom:12px;font-weight:700}
+.notes .ttl{font-family:var(--display);font-size:18px;color:#fff;margin-bottom:6px}
+.notes .tm{font-family:var(--mono);font-size:11px;color:var(--bc-primary-bright);margin-bottom:12px}
+.notes p{font-size:13px;color:rgba(255,255,255,.82);line-height:1.7;margin-bottom:8px}
+.notes p b{color:#fff}
+.notes .hl{color:var(--lime)}
+.notes hr{border:0;border-top:1px solid rgba(255,255,255,.12);margin:10px 0}
+
+/* ==================== PRINT / PDF ==================== */
+@media print{
+  body{overflow:visible;background:#fff}
+  .ui,.hint,.notes{display:none !important}
+  .stage{width:100%;height:auto;transform:none !important}
+  .slide{position:relative;inset:auto;width:100%;height:720px;opacity:1 !important;visibility:visible !important;page-break-after:always}
+}
+</style>
+</head>
+<body>
+
+<div class="stage" id="stage">
+
+  <!-- ============================================================
+       SLIDE 1 — ABERTURA
+  ============================================================= -->
+  <section class="slide s1 active" data-note="1">
+    <div class="wrap">
+      <div class="s1-top">
+        <div class="s1-logo">
+          <img src="assets/images/logo.png" alt="Barracred Conecta">
+        </div>
+        <span class="badge ghost mono">PROJETO DE DESENVOLVIMENTO WEB</span>
+      </div>
+
+      <div class="s1-hero">
+        <span class="eyebrow on-dark s1-eyebrow">Projeto de reformulação do site</span>
+        <h1 class="s1-title">Barracred<br>Conecta</h1>
+        <div class="s1-sub">uma <span class="hl">nova experiência digital</span></div>
+        <div class="s1-impact">
+          <span class="line"></span>
+          <span>Conectando jovens, <span class="sep">·</span> oportunidades <span class="sep">·</span> transformação.</span>
+        </div>
+      </div>
+
+      <div class="s1-foot">
+        <div class="s1-team">
+          <b>Apresentam</b>
+          <span class="badge ghost mono">[Vinícius] · [Stefani] · [João Pedro] · [Pietro] · [Ewerton]</span>
+        </div>
+        <span class="s1-count">Equipe de desenvolvimento · 5 integrantes</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 4 — EQUIPE E PROCESSO
+  ============================================================= -->
+  <section class="slide light s4" data-note="4">
+    <div class="grid-bg"></div>
+    <div class="blob blob-b"></div>
+
+    <div class="pad">
+      <span class="eyebrow">Equipe e processo</span>
+      <h1 class="title s4-title">Cinco pessoas, diferentes habilidades, um único projeto</h1>
+
+      <div class="s4-journey">
+        <div class="s4-stops">
+          <div class="s4-track"></div>
+          <div class="s4-stop">
+            <div class="s4-disc"><b>1</b><span>Etapa</span></div>
+            <div class="s4-label">Planejamento</div>
+          </div>
+          <div class="s4-stop d2">
+            <div class="s4-disc"><b>2</b><span>Etapa</span></div>
+            <div class="s4-label">Organização do conteúdo</div>
+          </div>
+          <div class="s4-stop d3">
+            <div class="s4-disc"><b>3</b><span>Etapa</span></div>
+            <div class="s4-label">Design e desenvolvimento</div>
+          </div>
+          <div class="s4-stop d4">
+            <div class="s4-disc"><b>4</b><span>Etapa</span></div>
+            <div class="s4-label">Testes e ajustes</div>
+          </div>
+        </div>
+      </div>
+
+      <p class="body s4-text">O projeto foi construído de forma colaborativa, reunindo planejamento, conteúdo, design, desenvolvimento e revisão.</p>
+
+      <div class="s4-team">
+        <span class="member">[NOME DO INTEGRANTE 1]</span>
+        <span class="member">[NOME DO INTEGRANTE 2]</span>
+        <span class="member">[NOME DO INTEGRANTE 3]</span>
+        <span class="member">[NOME DO INTEGRANTE 4]</span>
+        <span class="member">[NOME DO INTEGRANTE 5]</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 2 — CONTEXTO E OBJETIVO
+  ============================================================= -->
+  <section class="slide light s2" data-note="2">
+    <div class="grid-bg"></div>
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+
+    <div class="pad">
+      <span class="eyebrow">Contexto e objetivo</span>
+      <h1 class="title s2-title">Evoluir o site para fortalecer a conexão com o público</h1>
+
+      <div class="obj-grid">
+        <div class="obj"><span class="n">1</span><b>Facilitar o acesso às informações</b></div>
+        <div class="obj"><span class="n b2">2</span><b>Aproximar a comunicação do público jovem</b></div>
+        <div class="obj"><span class="n b3">3</span><b>Valorizar a identidade e as ações do programa</b></div>
+      </div>
+
+      <div class="s2-right">
+        <div class="s2-frame">
+          <div class="bar"><i></i><i></i><i></i></div>
+          <div class="shot"><img src="assets/images/site.antigo.png" alt="Recorte do site anterior do Barracred Conecta"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE — COMPARATIVO: SITE ATUAL × NOVO SITE
+  ============================================================= -->
+  <section class="slide light scmp" data-note="7">
+    <div class="grid-bg"></div>
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+
+    <div class="pad">
+      <span class="eyebrow">Comparativo</span>
+      <h1 class="title scmp-title">Do site atual ao novo site</h1>
+
+      <div class="scmp-grid">
+        <div class="scmp-card">
+          <span class="scmp-label"><span class="dot old"></span> Site atual</span>
+          <div class="s2-frame scmp-frame">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="shot"><img src="assets/images/site.antigo.png" alt="Site atual do Barracred Conecta"></div>
+          </div>
+        </div>
+
+        <div class="scmp-vs">→</div>
+
+        <div class="scmp-card">
+          <span class="scmp-label"><span class="dot new"></span> Novo site</span>
+          <div class="s2-frame scmp-frame">
+            <div class="bar"><i></i><i></i><i></i></div>
+            <div class="shot"><img src="assets/images/Desktop.site.png" alt="Novo site do Barracred Conecta"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 3 — PRINCIPAIS MELHORIAS
+  ============================================================= -->
+  <section class="slide light s3" data-note="3">
+    <div class="grid-bg"></div>
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+
+    <div class="pad">
+      <span class="eyebrow">Principais melhorias</span>
+      <h1 class="title s3-title">Uma experiência mais clara, atual e conectada</h1>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="ic">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 4v4M12 16v4M4 12h4M16 12h4"/><circle cx="12" cy="12" r="1.6"/></svg>
+          </div>
+          <span class="k">Pilar 01</span>
+          <h3>Navegação e organização</h3>
+          <p>Informações distribuídas de forma mais clara, com caminhos simples e hierarquia visual bem definida.</p>
+          <span class="tick">Mais clareza para quem visita</span>
+        </div>
+
+        <div class="pillar mid">
+          <div class="ic">
+            <svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L20 10l-5.1 1.4L12 17l-2.9-5.6L4 10l6.1-1.4z"/><path d="M19 15l.9 2.6 2.6.9-2.6.9L19 22l-.9-2.6-2.6-.9 2.6-.9z"/></svg>
+          </div>
+          <span class="k">Pilar 02</span>
+          <h3>Identidade e comunicação</h3>
+          <p>Visual mais contemporâneo e acolhedor, conectado ao público jovem sem perder a credibilidade institucional.</p>
+          <span class="tick">Fala a linguagem dos jovens</span>
+        </div>
+
+        <div class="pillar flat">
+          <div class="ic">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="13" height="10" rx="1.5"/><path d="M11 18h4M13 14v4"/><rect x="17.5" y="9" width="4" height="8" rx="1.5"/></svg>
+          </div>
+          <span class="k">Pilar 03</span>
+          <h3>Experiência em diferentes dispositivos</h3>
+          <p>Estrutura pensada para uma boa navegação tanto no computador quanto no celular.</p>
+          <span class="tick">Computador e celular</span>
+        </div>
+      </div>
+
+      <div class="s3-message">
+        <div class="inner">
+          <span class="dot"></span>
+          <span>O novo site não representa apenas uma mudança visual — reorganiza a experiência e fortalece a comunicação do programa.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 5 — DEMONSTRAÇÃO DO SITE
+  ============================================================= -->
+  <section class="slide s5" data-note="5">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+
+    <div class="pad">
+      <div class="s5-head">
+        <div>
+          <span class="eyebrow on-dark">Demonstração</span>
+          <h1 class="s5-title">Da proposta à experiência</h1>
+        </div>
+        <span class="live-pill"><span class="pulse"></span> Demonstração ao vivo</span>
+      </div>
+
+      <div class="s5-stage">
+        <div class="laptop">
+          <div class="screen">
+            <div class="inner">
+              <img src="assets/images/Desktop.site.png" alt="Captura da página inicial do novo site">
+            </div>
+          </div>
+          <div class="base"></div>
+        </div>
+        <div class="phone">
+          <div class="inner">
+            <img src="assets/images/Mobile.site.png" alt="Captura da versão mobile do novo site">
+          </div>
+        </div>
+      </div>
+
+      <div class="s5-tags">
+        <span class="badge ghost">Navegação</span>
+        <span class="badge ghost">Conteúdo</span>
+        <span class="badge ghost">Responsividade</span>
+      </div>
+
+      <div class="s5-meta">
+        <div class="s5-live">
+          <div class="qr-ph"><span>[INSERIR<br>QR CODE]</span></div>
+          <span class="badge mono">[barracredconecta.com.br — INSERIR ENDEREÇO]</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       SLIDE 6 — RESULTADO E ENCERRAMENTO
+  ============================================================= -->
+  <section class="slide s6" data-note="6">
+    <div class="glow g1"></div>
+    <div class="glow g2"></div>
+
+    <div class="pad">
+      <div class="s6-top">
+        <div>
+          <span class="eyebrow on-dark">Resultado</span>
+          <h1 class="s6-title">Mais do que um novo visual, uma nova forma de conectar</h1>
+        </div>
+        <div class="s6-logo"><img src="assets/images/logo.png" alt="Barracred Conecta"></div>
+      </div>
+
+      <div class="s6-card">
+        <div class="glass s6-col">
+          <h4>O que isso significa</h4>
+          <ul class="s6-check">
+            <li>Informações mais organizadas</li>
+            <li>Comunicação mais próxima do público jovem</li>
+            <li>Identidade digital mais alinhada ao programa</li>
+          </ul>
+        </div>
+
+        <div class="glass s6-col qr">
+          <div class="qr"><span>[INSERIR<br>QR CODE<br>DO SITE]</span></div>
+          <span class="url">[ENDEREÇO DO SITE]</span>
+        </div>
+      </div>
+
+      <div class="s6-final">Conectando <span class="hl">jovens, oportunidades</span> e transformação.</div>
+
+      <div class="s6-foot">
+        <div class="s6-team">
+          <span>[NOME DO INTEGRANTE 1]</span>
+          <span>[NOME DO INTEGRANTE 2]</span>
+          <span>[NOME DO INTEGRANTE 3]</span>
+          <span>[NOME DO INTEGRANTE 4]</span>
+          <span>[NOME DO INTEGRANTE 5]</span>
+        </div>
+        <div class="s6-thanks">Agradecemos aos diretores, coordenadores e responsáveis pelo curso.</div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ==================== UI DE NAVEGAÇÃO ==================== -->
+<div class="ui" id="ui">
+  <span class="count" id="uiCount">01 / 07</span>
+  <div class="dots" id="uiDots"></div>
+</div>
+<div class="hint">
+  <b>←</b>/<b>→</b> navegar &nbsp;·&nbsp; <b>N</b> notas &nbsp;·&nbsp; <b>F</b> tela cheia &nbsp;·&nbsp; <b>P</b> PDF
+</div>
+
+<!-- ==================== NOTAS DO APRESENTADOR ==================== -->
+<div class="notes" id="notes">
+  <div data-notes-for="1">
+    <span class="tag">Slide 1 · Abertura · ~30s · Apresentador 1</span>
+    <div class="ttl">Barracred Conecta: uma nova experiência digital</div>
+    <div class="tm">APRESENTADOR 1 · tempo estimado: 30 segundos</div>
+    <p><b>Mensagem central:</b> apresentação do projeto de reformulação do site, feita pela equipe de desenvolvimento.</p>
+    <p><b>Fala:</b> “Bom dia. Somos a equipe de desenvolvimento e hoje apresentamos o projeto de reformulação do site do Barracred Conecta — uma nova experiência digital pensada para conectar jovens, oportunidades e transformação.”</p>
+    <p class="hl">Momento da troca: a fala do Slide 1 continua naturalmente para o Slide 2, sem troca de apresentador.</p>
+  </div>
+
+  <div data-notes-for="2">
+    <span class="tag">Slide 2 · Contexto e objetivo · ~1min · Apresentador 1</span>
+    <div class="ttl">Evoluir o site para fortalecer a conexão com o público</div>
+    <div class="tm">APRESENTADOR 1 · tempo estimado: 1 minuto</div>
+    <p><b>Mensagem central:</b> o programa já tinha site; este projeto é uma evolução, não uma criação do zero.</p>
+    <p><b>Fala:</b> “O Barracred Conecta já possuía uma presença digital. A partir dela, identificamos oportunidades de evolução: melhor organização das informações, navegação mais clara e uma comunicação mais próxima do público jovem.”</p>
+    <p><b>Cuidado com a linguagem:</b> usar sempre <span class="hl">evolução, aprimoramento, oportunidades de melhoria, nova proposta</span>. Nunca falar que o site anterior era ruim ou ultrapassado — ele foi o ponto de partida do aprimoramento.</p>
+  </div>
+
+  <div data-notes-for="3">
+    <span class="tag">Slide 3 · Principais melhorias · ~1min · Apresentador 1</span>
+    <div class="ttl">Uma experiência mais clara, atual e conectada</div>
+    <div class="tm">APRESENTADOR 1 · tempo estimado: 1 minuto</div>
+    <p><b>Mensagem central:</b> o novo site não é só uma mudança visual — reorganiza a experiência em três pilares.</p>
+    <p><b>Fala:</b> “A nova proposta se apoia em três pilares. Navegação e organização: informações claras e caminhos simples. Identidade e comunicação: um visual contemporâneo e acolhedor, sem perder a credibilidade institucional. E experiência em diferentes dispositivos: boa navegação no computador e no celular.”</p>
+    <p>Encerrar reforçando a frase do slide: reorganizar a experiência e fortalecer a comunicação do programa.</p>
+  </div>
+
+  <div data-notes-for="7">
+    <span class="tag">Slide 7 · Comparativo · ~30s · Apresentador 1</span>
+    <div class="ttl">Do site atual ao novo site</div>
+    <div class="tm">APRESENTADOR 1 · tempo estimado: 30 segundos</div>
+    <p><b>Mensagem central:</b> comparação visual lado a lado — o ponto de partida (site atual) e a nova proposta.</p>
+    <p><b>Fala:</b> “Para visualizar a evolução, colocamos lado a lado o site atual e o novo site — do que tínhamos como base para a nova experiência digital.”</p>
+    <p class="hl">Transição: seguir naturalmente para as principais melhorias.</p>
+  </div>
+
+  <div data-notes-for="4">
+    <span class="tag">Slide 4 · Equipe e processo · ~1min · Apresentador 1</span>
+    <div class="ttl">Cinco pessoas, diferentes habilidades, um único projeto</div>
+    <div class="tm">APRESENTADOR 1 · tempo estimado: 1 minuto</div>
+    <p><b>Mensagem central:</b> trabalho coletivo — cinco integrantes, quatro etapas de processo, nenhuma estrutura hierárquica.</p>
+    <p><b>Fala:</b> “O projeto foi construído de forma colaborativa: planejamento, organização do conteúdo, design e desenvolvimento, e testes e ajustes. Cinco pessoas, diferentes habilidades, um único projeto.”</p>
+    <p class="hl">Momento da troca: ao final deste slide, passar a fala para o Apresentador 2 usando a frase de transição:</p>
+    <p class="hl">“A partir desses objetivos e do trabalho desenvolvido em equipe, chegamos a uma nova proposta de experiência digital. Agora, vamos apresentar como essas decisões foram aplicadas no site.”</p>
+  </div>
+
+  <div data-notes-for="5">
+    <span class="tag">Slide 5 · Demonstração ao vivo · ~4min · Apresentador 2</span>
+    <div class="ttl">Da proposta à experiência</div>
+    <div class="tm">APRESENTADOR 2 · tempo estimado: 4 minutos (incluindo a demonstração ao vivo)</div>
+    <p><b>Mensagem central:</b> apresentar o site em uso e mostrar que as decisões dos slides anteriores foram aplicadas na prática.</p>
+    <p><b>Fala:</b> “Esta é a proposta aplicada. Vou mostrar o site ao vivo, navegando na página inicial, pelo menu, por uma seção principal e pela versão para celular — navegação, conteúdo e responsividade.”</p>
+    <p><b>Demonstração (rota sugerida, ~3min30):</b> 1) página inicial e apresentação do programa; 2) menu e organização das informações; 3) uma seção principal; 4) adaptação para celular, se disponível.</p>
+    <p><b>ATENÇÃO:</b> ficar atento ao tempo. Ao final, indicar o endereço do site no slide.</p>
+    <p class="hl">Momento: iniciar a demonstração ao vivo aqui. Apresentador 2 segue para o Slide 6 no encerramento.</p>
+  </div>
+
+  <div data-notes-for="6">
+    <span class="tag">Slide 6 · Resultado e encerramento · ~1min30 · Apresentador 2</span>
+    <div class="ttl">Mais do que um novo visual, uma nova forma de conectar</div>
+    <div class="tm">APRESENTADOR 2 · tempo estimado: 1 minuto e 30 segundos</div>
+    <p><b>Mensagem central:</b> o projeto transforma a presença digital do programa em uma experiência mais clara, acolhedora e conectada ao seu propósito.</p>
+    <p><b>Fala:</b> “Encerramos com três conquistas: informações mais organizadas, comunicação mais próxima do público jovem e identidade digital mais alinhada ao programa.”</p>
+    <p>Fechar com a frase em destaque: <span class="hl">“Conectando jovens, oportunidades e transformação.”</span> — e agradecer aos diretores, coordenadores e responsáveis pelo curso.</p>
+    <p>O slide permanece em tela durante as perguntas — QR Code e endereço ficam disponíveis para o público.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dotsWrap=document.getElementById('uiDots');
+  var count=document.getElementById('uiCount');
+  var notes=document.getElementById('notes');
+  var idx=0,total=slides.length;
+  var touchX=0;
+
+  slides.forEach(function(s,i){
+    var d=document.createElement('i');
+    d.addEventListener('click',function(){go(i)});
+    dotsWrap.appendChild(d);
+  });
+  var dots=dotsWrap.querySelectorAll('i');
+
+  function go(n){
+    idx=Math.max(0,Math.min(total-1,n));
+    slides.forEach(function(s,i){s.classList.toggle('active',i===idx)});
+    dots.forEach(function(d,i){d.classList.toggle('on',i===idx)});
+    count.textContent=(idx+1<10?'0':'')+(idx+1)+' / '+(total<10?'0':'')+total;
+    var active=slides[idx];
+    var noteEl=notes.querySelector('[data-notes-for="'+active.getAttribute('data-note')+'"]');
+    if(noteEl){notes.querySelectorAll('[data-notes-for]').forEach(function(n){n.style.display='none'});noteEl.style.display='block'}
+    window.scrollTo(0,0);
+  }
+
+  function next(){go(idx+1)}
+  function prev(){go(idx-1)}
+
+  document.addEventListener('keydown',function(e){
+    if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '||e.key==='PageDown'){e.preventDefault();next()}
+    else if(e.key==='ArrowLeft'||e.key==='ArrowUp'||e.key==='PageUp'){e.preventDefault();prev()}
+    else if(e.key==='n'||e.key==='N'){notes.classList.toggle('open')}
+    else if(e.key==='f'||e.key==='F'){if(document.fullscreenElement){document.exitFullscreen()}else{document.documentElement.requestFullscreen()}}
+    else if(e.key==='Home'){go(0)}
+    else if(e.key==='End'){go(total-1)}
+  });
+
+  document.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',function(e){
+    var dx=e.changedTouches[0].clientX-touchX;
+    if(Math.abs(dx)>50){dx<0?next():prev()}
+  },{passive:true});
+
+  function resize(){
+    var s=Math.min(window.innerWidth/1280,window.innerHeight/720);
+    var stage=document.getElementById('stage');
+    stage.style.transform='scale('+s+')';
+    stage.style.width='1280px';
+    stage.style.height='720px';
+  }
+  window.addEventListener('resize',resize);
+  resize();
+  go(0);
+})();
+</script>
+</body>
+</html>

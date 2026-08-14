@@ -1,0 +1,42 @@
+<% content_for :title, @aluno.nome %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title"><%= @aluno.nome %></h2>
+    <div class="admin-actions">
+      <%= link_to "Editar", edit_aluno_path(@aluno), class: "admin-btn" %>
+      <%= button_to "Excluir", @aluno, method: :delete, data: { turbo_confirm: "Excluir este aluno?" }, class: "admin-btn-danger" %>
+    </div>
+  </div>
+
+  <table class="admin-table">
+    <tbody>
+      <tr>
+        <th style="width:200px">Foto</th>
+        <td>
+          <% if @aluno.foto.attached? %>
+            <%= image_tag @aluno.foto, style: "max-width:180px;border-radius:14px" %>
+          <% else %>
+            <em style="color:var(--bc-muted)">Sem foto</em>
+          <% end %>
+        </td>
+      </tr>
+      <tr><th>Turma</th><td><%= @aluno.turma %></td></tr>
+      <tr><th>Depoimento</th><td><%= @aluno.depoimento %></td></tr>
+      <tr><th>E-mail</th><td><%= @aluno.email %></td></tr>
+      <tr><th>Telefone</th><td><%= @aluno.telefone %></td></tr>
+      <tr>
+        <th>Status</th>
+        <td>
+          <% if @aluno.ativo? %>
+            <span class="admin-badge admin-badge-on">Ativo</span>
+          <% else %>
+            <span class="admin-badge admin-badge-off">Inativo</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to "← Voltar", alunos_path, class: "admin-btn-ghost" %>
+</div>

@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  secao: hero
+  titulo: Barracred Conecta
+  posicao: 1
+  ativo: true
+
+two:
+  secao: galeria
+  titulo: Foto 1
+  posicao: 1
+  ativo: true

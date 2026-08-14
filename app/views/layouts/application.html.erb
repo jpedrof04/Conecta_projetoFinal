@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <title><%= content_for(:title) || "Barracred Conecta · Admin" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= yield :head %>
+    <link rel="icon" href="/assets/favicon.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body>
+    <% if authenticated? %>
+      <div class="admin-shell">
+        <aside class="admin-sidebar">
+          <a class="admin-brand" href="/alunos">
+            <%= image_tag "logo.png", alt: "Barracred Conecta" %>
+          </a>
+          <nav class="admin-nav">
+            <span class="admin-nav-group">Conteúdo do Site</span>
+            <%= link_to conteudos_path, class: ("admin-nav-link active" if nav_active?(conteudos_path)) do %>
+              <span class="admin-nav-icon">📝</span> Páginas / Seções
+            <% end %>
+            <span class="admin-nav-group">Cadastros</span>
+            <%= link_to alunos_path, class: ("admin-nav-link active" if nav_active?(alunos_path)) do %>
+              <span class="admin-nav-icon">👥</span> Alunos
+            <% end %>
+            <%= link_to professors_path, class: ("admin-nav-link active" if nav_active?(professors_path)) do %>
+              <span class="admin-nav-icon">🧑‍🏫</span> Professores
+            <% end %>
+            <%= link_to projetos_path, class: ("admin-nav-link active" if nav_active?(projetos_path)) do %>
+              <span class="admin-nav-icon">📁</span> Projetos
+            <% end %>
+          </nav>
+          <div class="admin-sidebar-foot">
+            <span class="admin-user"><%= Current.user.email_address %></span>
+            <%= button_to "Sair", session_path, method: :delete, class: "admin-logout" %>
+          </div>
+        </aside>
+
+        <main class="admin-main">
+          <header class="admin-topbar">
+            <h1 class="admin-page-title"><%= content_for(:title) || "Painel" %></h1>
+          </header>
+          <% if notice %>
+            <div class="admin-alert admin-alert-ok"><%= notice %></div>
+          <% end %>
+          <% if alert %>
+            <div class="admin-alert admin-alert-err"><%= alert %></div>
+          <% end %>
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <%= yield %>
+    <% end %>
+  </body>
+</html>

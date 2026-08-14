@@ -1,0 +1,55 @@
+<% content_for :title, "Projetos" %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title">Projetos</h2>
+    <%= link_to "+ Novo Projeto", new_projeto_path, class: "admin-btn" %>
+  </div>
+
+  <% if @projetos.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Capa</th>
+          <th>Título</th>
+          <th>Descrição</th>
+          <th>Fotos</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projetos.each do |projeto| %>
+          <tr>
+            <td>
+              <% if projeto.capa.attached? %>
+                <%= image_tag projeto.capa, class: "admin-thumb" %>
+              <% else %>
+                <div class="admin-thumb" style="background:#eef4f1"></div>
+              <% end %>
+            </td>
+            <td><strong><%= projeto.titulo %></strong></td>
+            <td style="max-width:340px"><small><%= truncate(projeto.descricao, length: 90) %></small></td>
+            <td><span class="admin-badge admin-badge-on"><%= projeto.imagens.count %> fotos</span></td>
+            <td>
+              <% if projeto.ativo? %>
+                <span class="admin-badge admin-badge-on">Ativo</span>
+              <% else %>
+                <span class="admin-badge admin-badge-off">Inativo</span>
+              <% end %>
+            </td>
+            <td class="admin-actions">
+              <%= link_to "Editar", edit_projeto_path(projeto), class: "admin-btn-ghost" %>
+              <%= button_to "Excluir", projeto, method: :delete, data: { turbo_confirm: "Excluir este projeto?" }, class: "admin-btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="admin-empty">
+      <p>Nenhum projeto cadastrado ainda.</p>
+      <%= link_to "Cadastrar primeiro projeto", new_projeto_path, class: "admin-btn" %>
+    </div>
+  <% end %>
+</div>

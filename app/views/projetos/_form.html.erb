@@ -1,0 +1,55 @@
+<%= form_with(model: projeto, class: "admin-form") do |form| %>
+  <% if projeto.errors.any? %>
+    <div class="admin-alert admin-alert-err">
+      <strong><%= pluralize(projeto.errors.count, "erro") %> impediram o salvamento:</strong>
+      <ul>
+        <% projeto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="admin-field">
+      <%= form.label :titulo, "Título do projeto" %>
+      <%= form.text_field :titulo, required: true %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :descricao, "Descrição" %>
+      <%= form.textarea :descricao, placeholder: "Sobre o projeto..." %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :capa, "Foto de capa" %>
+      <% if projeto.capa.attached? %>
+        <span class="admin-photo-preview"><%= image_tag projeto.capa %></span>
+      <% end %>
+      <%= form.file_field :capa, accept: "image/*" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :imagens, "Galeria (várias fotos)" %>
+      <% if projeto.imagens.attached? %>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+          <% projeto.imagens.each do |img| %>
+            <%= image_tag img, style: "width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid var(--bc-border-soft)" %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= form.file_field :imagens, multiple: true, accept: "image/*" %>
+      <small style="color:var(--bc-muted)">Enviar novas fotos adiciona à galeria.</small>
+    </div>
+
+    <div class="admin-field admin-check">
+      <%= form.checkbox :ativo, checked: projeto.ativo != false %>
+      <%= form.label :ativo, "Projeto ativo (aparece no site)" %>
+    </div>
+  </div>
+
+  <div class="admin-form-actions">
+    <%= form.submit projeto.persisted? ? "Salvar alterações" : "Criar projeto", class: "admin-btn" %>
+    <%= link_to "Cancelar", projetos_path, class: "admin-btn-ghost" %>
+  </div>
+<% end %>

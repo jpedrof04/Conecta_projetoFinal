@@ -1,0 +1,80 @@
+<%= form_with(model: conteudo, class: "admin-form") do |form| %>
+  <% if conteudo.errors.any? %>
+    <div class="admin-alert admin-alert-err">
+      <strong><%= pluralize(conteudo.errors.count, "erro") %> impediram o salvamento:</strong>
+      <ul>
+        <% conteudo.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="admin-field">
+      <%= form.label :secao, "Seção do site" %>
+      <%= form.select :secao, Conteudo::SECOES.map { |chave, rotulo| [rotulo, chave] }, { include_blank: "— escolha a seção —" } %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :titulo, "Título / Nome do item" %>
+      <%= form.text_field :titulo, placeholder: "Ex.: Seja bem-vindo ao Barracred Conecta" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :subtitulo, "Subtítulo / Rótulo pequeno (ex.: nome do professor, turma)" %>
+      <%= form.text_field :subtitulo %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :texto, "Texto (parágrafo, descrição ou depoimento)" %>
+      <%= form.textarea :texto, placeholder: "Texto que aparece nesta seção..." %>
+    </div>
+
+    <div class="row">
+      <div class="admin-field" style="margin-right:12px">
+        <%= form.label :botao_texto, "Texto do botão" %>
+        <%= form.text_field :botao_texto, placeholder: "Ex.: Quero me inscrever" %>
+      </div>
+      <div class="admin-field">
+        <%= form.label :botao_link, "Link do botão" %>
+        <%= form.text_field :botao_link, placeholder: "https://..." %>
+      </div>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :imagem, "Imagem principal" %>
+      <% if conteudo.imagem.attached? %>
+        <span class="admin-photo-preview"><%= image_tag conteudo.imagem %></span>
+      <% end %>
+      <%= form.file_field :imagem, accept: "image/*" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :imagens, "Galeria (várias fotos)" %>
+      <% if conteudo.imagens.attached? %>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px">
+          <% conteudo.imagens.each do |img| %>
+            <%= image_tag img, style: "width:70px;height:70px;object-fit:cover;border-radius:10px;border:1px solid var(--bc-border-soft)" %>
+          <% end %>
+        </div>
+      <% end %>
+      <%= form.file_field :imagens, multiple: true, accept: "image/*" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :posicao, "Ordem de exibição" %>
+      <%= form.number_field :posicao, min: 0 %>
+    </div>
+
+    <div class="admin-field admin-check">
+      <%= form.checkbox :ativo, checked: conteudo.ativo != false %>
+      <%= form.label :ativo, "Ativo (aparece no site)" %>
+    </div>
+  </div>
+
+  <div class="admin-form-actions">
+    <%= form.submit conteudo.persisted? ? "Salvar alterações" : "Criar item", class: "admin-btn" %>
+    <%= link_to "Cancelar", conteudos_path, class: "admin-btn-ghost" %>
+  </div>
+<% end %>

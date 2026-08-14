@@ -1,0 +1,57 @@
+<%= form_with(model: aluno, class: "admin-form") do |form| %>
+  <% if aluno.errors.any? %>
+    <div class="admin-alert admin-alert-err">
+      <strong><%= pluralize(aluno.errors.count, "erro") %> impediram o salvamento:</strong>
+      <ul>
+        <% aluno.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="admin-card">
+    <div class="admin-field">
+      <%= form.label :nome, "Nome completo" %>
+      <%= form.text_field :nome, required: true %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :turma, "Turma" %>
+      <%= form.text_field :turma, placeholder: "Ex.: Turma 4" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :depoimento, "Depoimento" %>
+      <%= form.textarea :depoimento, placeholder: "Frase do aluno para o site..." %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :email, "E-mail" %>
+      <%= form.email_field :email, placeholder: "aluno@email.com" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :telefone, "Telefone" %>
+      <%= form.telephone_field :telefone, placeholder: "(00) 00000-0000" %>
+    </div>
+
+    <div class="admin-field">
+      <%= form.label :foto, "Foto do aluno" %>
+      <% if aluno.foto.attached? %>
+        <span class="admin-photo-preview"><%= image_tag aluno.foto %></span>
+      <% end %>
+      <%= form.file_field :foto, accept: "image/*" %>
+    </div>
+
+    <div class="admin-field admin-check">
+      <%= form.checkbox :ativo, checked: aluno.ativo != false %>
+      <%= form.label :ativo, "Aluno ativo (aparece no site)" %>
+    </div>
+  </div>
+
+  <div class="admin-form-actions">
+    <%= form.submit aluno.persisted? ? "Salvar alterações" : "Criar aluno", class: "admin-btn" %>
+    <%= link_to "Cancelar", alunos_path, class: "admin-btn-ghost" %>
+  </div>
+<% end %>

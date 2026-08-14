@@ -1,0 +1,58 @@
+<% content_for :title, "Alunos" %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title">Alunos</h2>
+    <%= link_to "+ Novo Aluno", new_aluno_path, class: "admin-btn" %>
+  </div>
+
+  <% if @alunos.any? %>
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Foto</th>
+          <th>Nome</th>
+          <th>Turma</th>
+          <th>Contato</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @alunos.each do |aluno| %>
+          <tr>
+            <td>
+              <% if aluno.foto.attached? %>
+                <%= image_tag aluno.foto, class: "admin-thumb" %>
+              <% else %>
+                <div class="admin-thumb" style="background:#eef4f1"></div>
+              <% end %>
+            </td>
+            <td><strong><%= aluno.nome %></strong></td>
+            <td><%= aluno.turma %></td>
+            <td>
+              <%= aluno.email %><br>
+              <small style="color:var(--bc-muted)"><%= aluno.telefone %></small>
+            </td>
+            <td>
+              <% if aluno.ativo? %>
+                <span class="admin-badge admin-badge-on">Ativo</span>
+              <% else %>
+                <span class="admin-badge admin-badge-off">Inativo</span>
+              <% end %>
+            </td>
+            <td class="admin-actions">
+              <%= link_to "Editar", edit_aluno_path(aluno), class: "admin-btn-ghost" %>
+              <%= button_to "Excluir", aluno, method: :delete, data: { turbo_confirm: "Excluir este aluno?" }, class: "admin-btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <div class="admin-empty">
+      <p>Nenhum aluno cadastrado ainda.</p>
+      <%= link_to "Cadastrar primeiro aluno", new_aluno_path, class: "admin-btn" %>
+    </div>
+  <% end %>
+</div>

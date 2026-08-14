@@ -1,0 +1,22 @@
+<div class="login-page">
+  <div class="login-card">
+    <%= image_tag "logo.png", alt: "Barracred Conecta" %>
+    <h1>Área Administrativa</h1>
+    <p>Barracred Conecta · CMS</p>
+
+    <%= tag.div(flash[:alert], class: "admin-alert admin-alert-err") if flash[:alert] %>
+    <%= tag.div(flash[:notice], class: "admin-alert admin-alert-ok") if flash[:notice] %>
+
+    <%= form_with url: session_path, class: "admin-form" do |form| %>
+      <div class="admin-field">
+        <%= form.label :email_address, "E-mail" %>
+        <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "admin@barracredconecta.com.br", value: params[:email_address] %>
+      </div>
+      <div class="admin-field">
+        <%= form.label :password, "Senha" %>
+        <%= form.password_field :password, required: true, autocomplete: "current-password", placeholder: "••••••••", maxlength: 72 %>
+      </div>
+      <%= form.submit "Entrar", class: "admin-btn" %>
+    <% end %>
+  </div>
+</div>

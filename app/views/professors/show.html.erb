@@ -1,0 +1,40 @@
+<% content_for :title, @professor.nome %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title"><%= @professor.nome %></h2>
+    <div class="admin-actions">
+      <%= link_to "Editar", edit_professor_path(@professor), class: "admin-btn" %>
+      <%= button_to "Excluir", @professor, method: :delete, data: { turbo_confirm: "Excluir este professor?" }, class: "admin-btn-danger" %>
+    </div>
+  </div>
+
+  <table class="admin-table">
+    <tbody>
+      <tr>
+        <th style="width:200px">Foto</th>
+        <td>
+          <% if @professor.foto.attached? %>
+            <%= image_tag @professor.foto, style: "max-width:180px;border-radius:14px" %>
+          <% else %>
+            <em style="color:var(--bc-muted)">Sem foto</em>
+          <% end %>
+        </td>
+      </tr>
+      <tr><th>Matéria</th><td><%= @professor.materia %></td></tr>
+      <tr><th>Bio</th><td><%= @professor.bio %></td></tr>
+      <tr>
+        <th>Status</th>
+        <td>
+          <% if @professor.ativo? %>
+            <span class="admin-badge admin-badge-on">Ativo</span>
+          <% else %>
+            <span class="admin-badge admin-badge-off">Inativo</span>
+          <% end %>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <%= link_to "← Voltar", professors_path, class: "admin-btn-ghost" %>
+</div>

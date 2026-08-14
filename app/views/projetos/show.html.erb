@@ -1,0 +1,36 @@
+<% content_for :title, @projeto.titulo %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title"><%= @projeto.titulo %></h2>
+    <div class="admin-actions">
+      <%= link_to "Editar", edit_projeto_path(@projeto), class: "admin-btn" %>
+      <%= button_to "Excluir", @projeto, method: :delete, data: { turbo_confirm: "Excluir este projeto?" }, class: "admin-btn-danger" %>
+    </div>
+  </div>
+
+  <p style="max-width:640px"><%= @projeto.descricao %></p>
+
+  <h3 style="font-size:1rem;color:var(--bc-muted);margin:24px 0 12px">Capa</h3>
+  <% if @projeto.capa.attached? %>
+    <%= image_tag @projeto.capa, style: "max-width:320px;border-radius:14px" %>
+  <% else %>
+    <em style="color:var(--bc-muted)">Sem capa</em>
+  <% end %>
+
+  <h3 style="font-size:1rem;color:var(--bc-muted);margin:24px 0 12px">Galeria (<%= @projeto.imagens.count %> fotos)</h3>
+  <div style="display:flex;flex-wrap:wrap;gap:10px">
+    <% @projeto.imagens.each do |img| %>
+      <%= image_tag img, style: "width:110px;height:110px;object-fit:cover;border-radius:12px;border:1px solid var(--bc-border-soft)" %>
+    <% end %>
+  </div>
+
+  <div style="margin-top:24px">
+    <% if @projeto.ativo? %>
+      <span class="admin-badge admin-badge-on">Ativo</span>
+    <% else %>
+      <span class="admin-badge admin-badge-off">Inativo</span>
+    <% end %>
+    <%= link_to "← Voltar", projetos_path, class: "admin-btn-ghost", style: "margin-left:12px" %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<% content_for :title, "Conteúdo" %>
+
+<div class="admin-card">
+  <div class="admin-topbar">
+    <h2 class="admin-page-title"><%= @conteudo.titulo.presence || "Conteúdo" %></h2>
+    <div class="admin-actions">
+      <%= link_to "Editar", edit_conteudo_path(@conteudo), class: "admin-btn" %>
+    </div>
+  </div>
+
+  <p><strong>Seção:</strong> <%= Conteudo::SECOES[@conteudo.secao] || @conteudo.secao %></p>
+  <p><%= @conteudo.texto %></p>
+
+  <%= link_to "← Voltar", conteudos_path, class: "admin-btn-ghost" %>
+</div>
