@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Barracred Conecta · CMS — Apresentação do Projeto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --primary: #3bbd80;
+    --primary-dark: #0f7a56;
+    --primary-deep: #07503c;
+    --dark: #063024;
+    --text: #163029;
+    --muted: #5d716a;
+    --offwhite: #f4fbf7;
+    --border: rgba(59, 189, 128, .22);
+    --shadow: 0 18px 50px rgba(7, 64, 46, .10);
+    --radius: 16px;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Poppins", system-ui, sans-serif;
+    background: var(--offwhite);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .hero {
+    background: linear-gradient(135deg, var(--dark), var(--primary-deep));
+    color: #fff;
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .hero h1 { margin: 0; font-size: 2rem; font-weight: 800; }
+  .hero p { margin: 10px 0 0; color: rgba(255,255,255,.75); max-width: 640px; margin-left:auto; margin-right:auto; }
+  .hero .tag {
+    display: inline-block; margin-top: 16px; padding: 6px 14px;
+    background: var(--primary); border-radius: 999px; font-size: .78rem; font-weight: 600;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 32px 20px 80px; }
+  section { margin-bottom: 40px; }
+  h2 {
+    font-size: 1.3rem; font-weight: 700; color: var(--dark);
+    padding-bottom: 8px; border-bottom: 2px solid var(--border); margin-bottom: 16px;
+  }
+  h3 { font-size: 1rem; color: var(--primary-dark); margin: 20px 0 8px; }
+  p, li { font-size: .92rem; }
+  .card {
+    background: #fff; border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 20px; margin-bottom: 16px;
+  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .pill { display: inline-block; padding: 3px 12px; border-radius: 999px; font-size: .74rem; font-weight: 600; }
+  .pill-green { background: #eafaf2; color: var(--primary-dark); }
+  .pill-blue { background: #e8f0fe; color: #1a4bb5; }
+  .pill-amber { background: #fff6e0; color: #a06a00; }
+  table { width: 100%; border-collapse: collapse; font-size: .84rem; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  th { color: var(--muted); text-transform: uppercase; font-size: .72rem; letter-spacing: .04em; }
+  tr:hover td { background: #f9fdfa; }
+  code {
+    font-family: "JetBrains Mono", monospace; font-size: .82em;
+    background: #063024; color: #6fe0a8; padding: 2px 7px; border-radius: 6px;
+  }
+  pre {
+    background: #063024; color: #d7f5e6; padding: 16px; border-radius: 12px;
+    overflow-x: auto; font-family: "JetBrains Mono", monospace; font-size: .82rem; line-height: 1.55;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+  .note { background: #fff6e0; border: 1px solid #f0d9a0; border-radius: 12px; padding: 14px 16px; font-size: .86rem; }
+  .flow {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center; font-size: .8rem; font-weight: 600;
+  }
+  .flow .step { background: #fff; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; }
+  .flow .arrow { color: var(--muted); }
+  .kbd {
+    display: inline-block; background: #fff; border: 1px solid var(--border); border-bottom-width: 3px;
+    border-radius: 8px; padding: 2px 9px; font-family: "JetBrains Mono", monospace; font-size: .8rem;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <h1>Barracred Conecta · CMS</h1>
+  <p>Apresentação da arquitetura do sistema: um site institucional dinâmico com área administrativa, alimentado por banco de dados e totalmente editável pelo cliente.</p>
+  <span class="tag">Ruby on Rails 8 · SQLite · Active Storage</span>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. VISÃO GERAL -->
+  <section>
+    <h2>1. Visão geral</h2>
+    <div class="card">
+      <p>O projeto converte o <b>site estático</b> do programa social <b>Barracred Conecta</b> em um sistema com <b>CMS próprio</b>: todo o conteúdo do site (textos, títulos, imagens, carrosséis, equipe, projetos) passou a viver em banco de dados e pode ser editado por uma <b>área administrativa</b> com login, no mesmo visual da marca.</p>
+      <div class="flow">
+        <span class="step">🏗️ Site estático (HTML/CSS/JS)</span>
+        <span class="arrow">→</span>
+        <span class="step">🗄️ Banco de dados (SQLite)</span>
+        <span class="step">→</span>
+        <span class="step">🌐 Site dinâmico (Rails)</span>
+        <span class="step">→</span>
+        <span class="step">🔐 Admin (login)</span>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>🎯 Objetivo</h3>
+        <p>Permitir que a equipe atualize fotos, textos, títulos e carrosséis <b>sem deformar o layout</b> e sem mexer em código.</p>
+      </div>
+      <div class="card">
+        <h3>🗂️ Stack</h3>
+        <p><b>Ruby 3.4 + Rails 8</b>, banco <b>SQLite</b>, uploads com <b>Active Storage</b>, HTML/ERB + CSS original do site, testes com Minitest.</p>
+      </div>
+      <div class="card">
+        <h3>✅ Estado</h3>
+        <p>CMS funcional, front dinâmico no ar, 63 itens de conteúdo semeados com as fotos originais e <b>38 testes passando</b>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ESTRUTURA DE PASTAS -->
+  <section>
+    <h2>2. Estrutura de pastas</h2>
+    <pre><code>Novo-Conecta/
+├── nova-v2/                  # Site original (estático) — fonte das fotos/textos
+│   ├── index.html
+│   └── assets/               # CSS, JS, vendor, imagens
+│
+└── cms/                      # ★ O CMS (Rails)
+    ├── app/
+    │   ├── controllers/
+    │   │   ├── site_controller.rb      # Página pública (root) — sem login
+    │   │   ├── conteudos_controller.rb # Edição de seções/textos/imagens
+    │   │   ├── alunos_controller.rb    # CRUD de alunos
+    │   │   ├── professors_controller.rb# CRUD de professores
+    │   │   ├── projetos_controller.rb  # CRUD de projetos
+    │   │   ├── sessions_controller.rb  # Login/logout
+    │   │   └── concerns/authentication.rb
+    │   ├── models/
+    │   │   ├── conteudo.rb    # Seções editáveis do site
+    │   │   ├── aluno.rb / professor.rb / projeto.rb
+    │   │   ├── user.rb / session.rb / current.rb
+    │   ├── views/
+    │   │   ├── site/home.html.erb   # Layout do site (puxa tudo do banco)
+    │   │   ├── layouts/site.html.erb
+    │   │   ├── layouts/application.html.erb  # Layout do admin
+    │   │   └── conteudos|alunos|professors|projetos/
+    │   └── helpers/site_helper.rb   # Texto, imagens, listas
+    ├── db/
+    │   ├── migrate/           # Schema (users, sessions, alunos,
+    │   │                      #  professors, projetos, conteudos)
+    │   └── seeds/
+    │       └── front_layout.rb   # ★ Grava o layout padrão do site
+    ├── public/
+    │   └── assets/            # CSS/JS/imagens copiadas do front
+    ├── storage/               # Fotos enviadas (Active Storage)
+    └── test/                  # 38 testes (controllers + autenticação)</code></pre>
+  </section>
+
+  <!-- 3. MODELO DE DADOS -->
+  <section>
+    <h2>3. Modelo de dados</h2>
+    <div class="card">
+      <h3>Conteudo — o coração do CMS</h3>
+      <p>Cada linha representa um item de uma seção do site. É o que permite editar <b>textos, títulos e imagens</b> e <b>adicionar fotos a carrosséis</b>.</p>
+      <table>
+        <thead><tr><th>Campo</th><th>Tipo</th><th>Função</th></tr></thead>
+        <tbody>
+          <tr><td><code>secao</code></td><td>string</td><td>Identifica a seção (hero, strip, quem_somos, sobre, depoimentos, aprender, projetos, turmas, galeria, equipe, participar, cta, footer)</td></tr>
+          <tr><td><code>titulo</code></td><td>string</td><td>Título / nome do item</td></tr>
+          <tr><td><code>subtitulo</code></td><td>string</td><td>Subtítulo, cargo, turma ou rótulo interno</td></tr>
+          <tr><td><code>texto</code></td><td>text</td><td>Parágrafos / descrição / depoimento</td></tr>
+          <tr><td><code>botao_texto</code></td><td>string</td><td>Texto do botão (ex.: "Quero me inscrever")</td></tr>
+          <tr><td><code>botao_link</code></td><td>string</td><td>Link do botão</td></tr>
+          <tr><td><code>posicao</code></td><td>integer</td><td>Ordem de exibição</td></tr>
+          <tr><td><code>ativo</code></td><td>boolean</td><td>Aparece ou não no site</td></tr>
+          <tr><td><code>imagem</code></td><td>attachment</td><td>Imagem principal do item</td></tr>
+          <tr><td><code>imagens</code></td><td>attachment</td><td>Galeria (múltiplas fotos)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Demais modelos</h3>
+      <table>
+        <thead><tr><th>Modelo</th><th>Campos</th><th>Finalidade</th></tr></thead>
+        <tbody>
+          <tr><td><b>Aluno</b></td><td>nome, turma, depoimento, email, telefone, ativo + foto</td><td>Depoimentos/flip-cards e cadastro de alunos</td></tr>
+          <tr><td><b>Professor</b></td><td>nome, materia, bio, ativo + foto</td><td>Corpo docente</td></tr>
+          <tr><td><b>Projeto</b></td><td>titulo, descricao, ativo + capa + imagens</td><td>Cards de projetos com galeria própria</td></tr>
+          <tr><td><b>User</b></td><td>email_address, password_digest</td><td>Login do admin (senha com hash bcrypt)</td></tr>
+          <tr><td><b>Session</b></td><td>user_id, ip, user_agent</td><td>Sessões de login</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 4. ROTAS -->
+  <section>
+    <h2>4. Rotas</h2>
+    <table>
+      <thead><tr><th>Rota</th><th>Ação</th><th>Público?</th></tr></thead>
+      <tbody>
+        <tr><td><code>GET /</code></td><td>Site público (home)</td><td><span class="pill pill-green">Sim</span></td></tr>
+        <tr><td><code>/conteudos</code></td><td>Admin — seções/textos/imagens</td><td><span class="pill pill-blue">Login</span></td></tr>
+        <tr><td><code>/alunos</code></td><td>Admin — alunos</td><td><span class="pill pill-blue">Login</span></td></tr>
+        <tr><td><code>/professors</code></td><td>Admin — professores</td><td><span class="pill pill-blue">Login</span></td></tr>
+        <tr><td><code>/projetos</code></td><td>Admin — projetos</td><td><span class="pill pill-blue">Login</span></td></tr>
+        <tr><td><code>/session/new</code></td><td>Página de login</td><td><span class="pill pill-green">Sim</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:.85rem;color:var(--muted)">Todas as rotas de CRUD são protegidas por <code>Authentication</code> (Rails 8): quem não está logado é redirecionado para o login.</p>
+  </section>
+
+  <!-- 5. FRONT PUXADO DO BANCO -->
+  <section>
+    <h2>5. Como o site é montado</h2>
+    <div class="card">
+      <p>A rota raiz chama <code>SiteController#home</code>, que carrega as seções do banco e a view <code>site/home.html.erb</code> monta o HTML usando o <b>mesmo CSS/JS original</b> (copiado para <code>public/assets</code>).</p>
+      <table>
+        <thead><tr><th>Seção da home</th><th>Vem de</th><th>Editável</th></tr></thead>
+        <tbody>
+          <tr><td>Hero (título + slogan)</td><td>Conteudo <code>hero</code></td><td>texto ✓ imagem ✓</td></tr>
+          <tr><td>Fita / marquee</td><td>Conteudo <code>strip</code></td><td>texto ✓</td></tr>
+          <tr><td>Quem Somos</td><td>Conteudo <code>quem_somos</code></td><td>texto ✓ fotos ✓</td></tr>
+          <tr><td>Sobre o Programa</td><td>Conteudo <code>sobre</code></td><td>texto ✓ fotos ✓</td></tr>
+          <tr><td>Jornada / depoimentos</td><td>Conteudo <code>depoimentos</code></td><td>texto ✓ foto ✓</td></tr>
+          <tr><td>O que você vai aprender</td><td>Conteudo <code>aprender</code> (9 cards)</td><td>texto ✓ ícone ✓</td></tr>
+          <tr><td>Cards de Projetos</td><td>Projeto (galeria própria)</td><td>texto ✓ fotos ✓</td></tr>
+          <tr><td>Turmas</td><td>Conteudo <code>turmas</code></td><td>foto ✓ + "＋ Adicionar"</td></tr>
+          <tr><td>Galeria / Carrossel</td><td>Conteudo <code>galeria</code> (16 fotos)</td><td>foto ✓ + "＋ Adicionar"</td></tr>
+          <tr><td>Equipe</td><td>Conteudo <code>equipe</code></td><td>texto ✓ foto ✓</td></tr>
+          <tr><td>Como Participar</td><td>Conteudo <code>participar</code></td><td>texto ✓ imagem ✓</td></tr>
+          <tr><td>CTA (inscrição/parceiro)</td><td>Conteudo <code>cta</code></td><td>texto ✓ botão ✓ link ✓</td></tr>
+          <tr><td>Rodapé</td><td>Conteudo <code>footer</code></td><td>texto ✓ contato ✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- 6. SEMENTES -->
+  <section>
+    <h2>6. Layout padrão — db/seeds/front_layout.rb</h2>
+    <div class="card">
+      <p>Este arquivo <b>grava a estrutura completa do front</b> no banco e anexa as fotos que já existiam em <code>nova-v2/assets/images</code> como padrão. É idempotente (pode rodar várias vezes sem duplicar).</p>
+      <div class="grid">
+        <div class="card" style="text-align:center"><h3>63</h3><p>itens de conteúdo<br><span style="font-size:.78rem;color:var(--muted)">50 com foto</span></p></div>
+        <div class="card" style="text-align:center"><h3>16</h3><p>fotos da galeria<br><span style="font-size:.78rem;color:var(--muted)">carrossel duplo</span></p></div>
+        <div class="card" style="text-align:center"><h3>6</h3><p>membros da equipe<br><span style="font-size:.78rem;color:var(--muted)">+ foto de capa</span></p></div>
+        <div class="card" style="text-align:center"><h3>2</h3><p>projetos<br><span style="font-size:.78rem;color:var(--muted)">com galeria própria</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ADMIN -->
+  <section>
+    <h2>7. Área administrativa</h2>
+    <div class="card">
+      <ul>
+        <li><b>Login</b> com senha criptografada (bcrypt) e sessão por cookie.</li>
+        <li><b>Páginas / Seções</b>: seções agrupadas com thumbnail, edição de título/subtítulo/texto/imagem/ordem e botão <b>"＋ Adicionar"</b> por seção (para incluir fotos em carrosséis).</li>
+        <li><b>Alunos / Professores</b>: CRUD com foto e status ativo/inativo.</li>
+        <li><b>Projetos</b>: capa + galeria múltipla.</li>
+        <li>Layout com a identidade visual da marca (verde Barracred, Poppins, glass cards).</li>
+      </ul>
+      <div class="note">📌 Login padrão: <b>admin@barracredconecta.com.br</b> / <b>barracred123</b></div>
+    </div>
+  </section>
+
+  <!-- 8. COMO RODAR -->
+  <section>
+    <h2>8. Como rodar</h2>
+    <pre><code>cd cms
+bundle install
+bin/rails db:migrate          # cria as tabelas
+bin/rails db:seed             # cria admin + layout padrão (fotos do front)
+bin/rails server              # sobe em http://localhost:3000</code></pre>
+    <div class="grid">
+      <div class="card">
+        <h3>Recriar do zero</h3>
+        <pre><code>bin/rails db:seed:replant</code></pre>
+        <p style="font-size:.82rem;color:var(--muted)">Apaga e recria o banco com o layout padrão.</p>
+      </div>
+      <div class="card">
+        <h3>Rodar testes</h3>
+        <pre><code>bin/rails test</code></pre>
+        <p style="font-size:.82rem;color:var(--muted)">38 testes: autenticação, alunos, professores, projetos e conteúdo.</p>
+      </div>
+      <div class="card">
+        <h3>Uploads</h3>
+        <p style="font-size:.82rem;color:var(--muted)">Fotos ficam em <code>cms/storage/</code> via Active Storage. No futuro, trocar por S3/Cloud é só configurar o service.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. POSSÍVEIS PRÓXIMOS PASSOS -->
+  <section>
+    <h2>9. Próximos passos (sugestões)</h2>
+    <div class="card">
+      <ul>
+        <li><b>Login por equipe</b> — tela de convite/recuperação de senha (o Rails 8 já gera a base).</li>
+        <li><b>Páginas editáveis</b> — adicionar seção "novidades/notícias" ou páginas internas além da home.</li>
+        <li><b>Redes sociais na equipe</b> — campos extra para linkedin/instagram de cada membro.</li>
+        <li><b>Produção</b> — trocar SQLite por PostgreSQL e migrar os assets/imagens para a nuvem.</li>
+        <li><b>Backup</b> — exportar o banco + storage (ou versionar o seed) para reconstrução rápida.</li>
+      </ul>
+    </div>
+  </section>
+
+  <p style="text-align:center;color:var(--muted);font-size:.8rem;margin-top:40px">Barracred Conecta · CMS — gerado em <span id="data"></span></p>
+</div>
+
+<script>document.getElementById("data").textContent = new Date().toLocaleDateString("pt-BR");</script>
+</body>
+</html>
