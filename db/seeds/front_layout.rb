@@ -169,6 +169,10 @@ grava_conteudo "participar", 0,
   titulo: "Como participar?",
   texto: "O programa é destinado a jovens entre 16 e 20 anos que buscam mais do que conhecimento técnico: buscam uma experiência de transformação pessoal e profissional.\n\nDuração: 10 meses. Vagas atuais: 20.\n\n• 70% para filhos ou dependentes de cooperados da Barracred.\n• 30% para jovens da comunidade em geral.\n\nRequisitos:\n• Ter entre 16 e 20 anos.\n• Estar cursando ou ter concluído a educação básica na rede pública.\n• Residir em Barra Bonita ou Igaraçu do Tietê - SP.\n• Ter comprometimento e disponibilidade para participar integralmente da formação.",
   imagem: "home/ChatGPT Image 13 de ago. de 2026, 15_57_20.png"
+grava_conteudo "participar", 1,
+  titulo: "Foto participar 1", imagem: "home/Imagem do WhatsApp de 2025-05-01 à(s) 08.56.09_7da9d661.jpg.jpeg"
+grava_conteudo "participar", 2,
+  titulo: "Foto participar 2", imagem: "home/IMG_0208.JPG.jpeg"
 
 # ---------- CTA / INSCRIÇÃO ----------
 grava_conteudo "cta", 0,

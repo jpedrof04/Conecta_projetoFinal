@@ -35,14 +35,7 @@
   <!-- HERO -->
   <section id="home" class="hero-section">
     <div class="hero-video-bg">
-      <iframe
-        src="https://www.youtube.com/embed/LXb3EKWsInQ?autoplay=1&mute=1&loop=1&playlist=LXb3EKWsInQ&controls=0&rel=0&modestbranding=1&showinfo=0"
-        title="Vídeo de fundo Barracred Conecta"
-        frameborder="0"
-        allow="autoplay; fullscreen"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen>
-      </iframe>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/MdCk5i2RRI8?autoplay=1&mute=1&loop=1&playlist=MdCk5i2RRI8&controls=0&disablekb=1&fs=0&iv_load_policy=3&modestbranding=1&showinfo=0&rel=0&playsinline=1" title="YouTube video player" frameborder="0" allow="autoplay; encrypted-media" referrerpolicy="strict-origin-when-cross-origin"></iframe>
     </div>
     <div class="fade-overlay"></div>
     <div class="hero-orb hero-orb-one"></div>
@@ -107,12 +100,8 @@
     <div class="container">
       <div class="row align-items-stretch g-4 glass-split program-split">
         <div class="col-lg-5">
-          <div class="about-photo-grid">
-            <% sobre_img.each do |foto| %>
-              <div class="about-photo-card reveal-card">
-                <img src="<%= img_url(foto) %>" alt="Momentos do Barracred Conecta">
-              </div>
-            <% end %>
+          <div class="image-frame h-100">
+            <img class="img-cover" src="<%= img_url(sobre_img.first) %>" alt="Jovens em atividade">
           </div>
         </div>
         <div class="col-lg-7">
@@ -302,8 +291,18 @@
     <div class="container">
       <div class="row g-4 align-items-stretch glass-split participation-box">
         <div class="col-lg-6">
-          <div class="image-frame h-100">
-            <img class="img-cover" src="<%= img_url(@participar) %>" alt="Jovens em atividade">
+          <div class="about-photo-grid">
+            <% if @participar_fotos.any? %>
+              <% @participar_fotos.each do |foto| %>
+                <div class="about-photo-card reveal-card">
+                  <img src="<%= img_url(foto) %>" alt="Momentos do Barracred Conecta">
+                </div>
+              <% end %>
+            <% else %>
+              <div class="about-photo-card reveal-card">
+                <img src="<%= img_url(@participar) %>" alt="Jovens em atividade">
+              </div>
+            <% end %>
           </div>
         </div>
         <div class="col-lg-6">
@@ -382,7 +381,7 @@
                 <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#about">Quem Somos</a></li>
                 <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#projects">Projetos</a></li>
                 <li class="list-inline-item ps-2"><a class="list-group-item-action" href="#who">Como Participar</a></li>
-                <li class="list-inline-item ps-2"><a class="list-group-item-action pe-0" href="#getin">Faça Parte</a></li>
+                <li class="list-inline-item ps-2"><a class="list-group-item-action pe-0" href="https://beforms.becompliance.com/680a40523c67010009167a96" target="_blank" rel="noopener">Faça Parte</a></li>
               </ul>
             </div>
             <div class="copyright-text">&copy;2026 Todos os Direitos Reservados <a href="https://www.barracredconecta.com.br/"> Barracred Conecta</a>.</div>
@@ -413,5 +412,5 @@
 <a href="#home" class="back-top" aria-label="Voltar ao topo"><i class="bi bi-arrow-up"></i></a>
 
 <script src="/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<script src="/assets/vendor/tiny-slider/tiny-slider.js"></script>
-<script src="/assets/js/index.js"></script>
+<script src="/assets/vendor/tiny-slider/tiny-slider.js?v=20260813b"></script>
+<script src="/assets/js/index.js?v=20260813b"></script>

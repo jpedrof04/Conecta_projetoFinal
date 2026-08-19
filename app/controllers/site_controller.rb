@@ -17,6 +17,7 @@ class SiteController < ApplicationController
     @equipe_head = Conteudo.da_secao("equipe").active.first
     @equipe = Conteudo.da_secao("equipe").active.where(posicao: 1..99)
     @participar = Conteudo.da_secao("participar").active.first
+    @participar_fotos = Conteudo.da_secao("participar").active.drop(1)
     @cta = Conteudo.da_secao("cta").active
     @footer = Conteudo.da_secao("footer").active.first
     @projetos = Projeto.where(ativo: true).order(:id)
